@@ -7,6 +7,10 @@ type MatchTableProps = {
 
 const MatchTable = ({ match }: MatchTableProps) => {
   const cellStyle = (player: MatchPlayer) => {
+    if (match.winner && player.player.id === match.winner.player.id) {
+      return styles.winnerCell;
+    }
+
     if (player.player.id === match.currentPlayer?.id) {
       return styles.currentPlayerCell;
     }
@@ -36,7 +40,7 @@ const MatchTable = ({ match }: MatchTableProps) => {
         </thead>
         <tbody>
           {match.matchPlayers.map((player) => (
-            <tr className={player.player.id === match.currentPlayer?.id ? styles.currentPlayer : styles.tr} key={player.player.id}>
+            <tr className={cellStyle(player)} key={player.player.id}>
               <td className={styles.td}>{player.player.name}</td>
               {player.roundScores.map((score, index) => (
                 <td className={cellStyle(player)}  key={index}>{score}</td>

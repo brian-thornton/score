@@ -1,0 +1,18 @@
+.container {
+  background-color: #292929;
+  height: 100vh;
+  padding: 10px;
+  text-align: center;
+}
+
+.header {
+  color: #FFFFFF;
+  font-size: 20px;
+  margin-left: 5px;
+}
+
+.result {
+  color: #FFFFFF;
+  font-size: 20px;
+  margin-left: 5px;
+}

@@ -19,7 +19,7 @@ export type Team = {
 };
 
 export enum MatchType {
-  TOURNAMENT = 'TOURNAMENT',
+  SINGLES_TOURNAMENT = 'SINGLES_TOURNAMENT',
   TARGET_NUMBER = 'TARGET_NUMBER',
 };
 
@@ -31,7 +31,8 @@ export type Match = {
   matchType: string,
   maxRounds: number,
   isComplete: boolean,
-  winner?: MatchPlayer | null | undefined, 
+  winner?: MatchPlayer | null | undefined,
+  overtime: boolean,
 };
 
 export default Player;

@@ -80,3 +80,11 @@
   padding: 1rem;
   text-align: center;
 }
+
+.winnerCell {
+  background: blue;
+  color: #FFFFFF;
+  font-weight: 600;
+  padding: 1rem;
+  text-align: center;
+}
