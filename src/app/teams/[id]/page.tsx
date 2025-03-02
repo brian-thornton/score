@@ -12,9 +12,9 @@ const TeamPage = () => {
   const { id } = params;
   const columns = ["Name", "Email", "Phone"];
   const [team, setTeam] = useState<Team>();
-  const [playerRows, setPlayerRows] = useState<string[][] | undefined>([]);
+  const [playerRows, setPlayerRows] = useState<string[][]>([]);
   const [players, setPlayers] = useState<Player[]>([]);
-  const [teamPlayers, setTeamPlayers] = useState<string[][] | undefined>([]);
+  const [teamPlayers, setTeamPlayers] = useState<string[][]>([]);
 
   const loadData = async () => {
     const data = await getTeams();
@@ -41,14 +41,18 @@ const TeamPage = () => {
   };
 
   const onRemoveFromTeam = async (index: number) => {
-    const player = teamPlayers ? teamPlayers[index] : [];
+    const player = teamPlayers ? teamPlayers[index] : null;
+
+    if (!player) {
+      return;
+    }
 
     await updateTeam({
       ...team,
       players: team?.players?.filter((p) => p.email !== player[1]),
     });
 
-    setTeamPlayers(teamPlayers.filter((_, i) => i !== index));
+    setTeamPlayers(teamPlayers?.filter((_, i) => i !== index));
     setPlayerRows([...playerRows, player]);
     await loadData();
   };
@@ -76,6 +80,7 @@ const TeamPage = () => {
         onRowAddClick={onAddToTeam}
         selectable
         tableHeading={`Available Players`}
+        deleteEnabled={false}
       />
     </div>
   );

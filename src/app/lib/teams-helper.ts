@@ -1,8 +1,10 @@
 import { Team } from './types';
 
+const baseUrl = 'http://localhost:3000/api';
+
 export const getTeams = (): Promise<Team[]> => {
   return new Promise((resolve, reject) => {
-    const url = `http://localhost:3000/api/teams`;
+    const url = `${baseUrl}/teams`;
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
@@ -25,7 +27,7 @@ export const createTeam = async (team: [Team]): Promise<Team> => {
       teams = [team][0];
     }
 
-    const url = `http://localhost:3000/api/teams`;
+    const url = `${baseUrl}/teams`;
     fetch(url, {
       method: 'POST',
       headers: {
@@ -53,7 +55,7 @@ export const updateTeam = async (team: Team): Promise<Team> => {
       return t;
     });
 
-    const url = `http://localhost:3000/api/teams`;
+    const url = `${baseUrl}/teams`;
     fetch(url, {
       method: 'POST',
       headers: {
@@ -76,7 +78,7 @@ export const deleteTeam = async (team: Team): Promise<Team> => {
     const teams = await getTeams();
     const newTeams = teams.filter((t) => t.id !== team.id);
 
-    const url = `http://localhost:3000/api/teams`;
+    const url = `${baseUrl}/teams`;
     fetch(url, {
       method: 'POST',
       headers: {

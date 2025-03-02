@@ -1,11 +1,10 @@
 import styles from "./ScoreInput.module.css";
-import { Match, Player } from "@/app/lib/types";
+import { Match } from "@/app/lib/types";
 
 type ScoreInputProps = {
   possibleScores: number[];
   onChange: (match: Match, score: number) => void;
   match: Match;
-
 };
 
 const ScoreInput = ({ match, possibleScores, onChange }: ScoreInputProps) => {
