@@ -1,0 +1,17 @@
+.container {
+  background-color: #292929;
+  height: 100vh;
+  padding: 10px;
+}
+
+.header {
+   color: #FFFFFF;
+   font-size: 20px;
+   margin-left: 5px;
+}
+
+@media screen and (min-width: 640px) {
+  .header {
+    font-size: 30px;
+  }
+}

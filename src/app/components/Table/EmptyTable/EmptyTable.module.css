@@ -1,0 +1,14 @@
+.th {
+  background: #333;
+  border-bottom: 2px solid #4b4b4b;
+  color: #FFFFFF;
+  font-weight: 600;
+  padding: 1rem;
+  text-align: left;
+}
+
+.td {
+  border-bottom: 1px solid #4b4b4b;
+  color: #FFFFFF;
+  padding: 1rem;
+}
