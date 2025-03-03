@@ -33,6 +33,7 @@ export type Match = {
   isComplete: boolean,
   winner?: MatchPlayer | null | undefined,
   overtime: boolean,
+  targetNumber?: number,
 };
 
 export default Player;
