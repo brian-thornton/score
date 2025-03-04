@@ -1,4 +1,5 @@
 import { Match, MatchPlayer, MatchType, Player } from "@/app/lib/types";
+import { isRoundComplete, nextActivePlayer } from "./match-utils";
 
 export const createNewMatch = (players: Player[]): Match => {
   const matchPlayers = players.map((player) => ({
@@ -17,18 +18,6 @@ export const createNewMatch = (players: Player[]): Match => {
     maxRounds: 10,
     isComplete: false,
   };
-};
-
-export const isRoundComplete = (matchPlayers: MatchPlayer[], currentRound: number): boolean => {
-  const activePlayers = matchPlayers.filter((player) => player.isActive);
-  return activePlayers.every((player) => player.roundScores.length >= currentRound);
-};
-
-export const nextActivePlayer = (matchPlayers: MatchPlayer[], currentPlayer: Player): any => {
-  const currentPlayerIndex = matchPlayers.findIndex((player) => player.player.id === currentPlayer.id);
-  const nextPlayerIndex = currentPlayerIndex + 1;
-  const nextPlayer = matchPlayers[nextPlayerIndex] || matchPlayers[0];
-  return nextPlayer;
 };
 
 const isGameComplete = (matchPlayers: MatchPlayer[], match: Match): boolean => {
