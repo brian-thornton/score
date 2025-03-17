@@ -5,6 +5,7 @@ import ScoreInput from "@/app/components/ScoreInput/ScoreInput";
 import { Match } from "@/app/lib/types";
 import styles from "./page.module.css";
 import MatchResult from "@/app/components/MatchResult/MatchResult";
+import GameHeader from "@/app/components/GameHeader/GameHeader";
 
 import { createNewMatch, updateScore } from "@/app/lib/target-number-manager";
 
@@ -32,6 +33,7 @@ const TargetNumberPage = () => {
 
   return (
     <div className={styles.container}>
+      <GameHeader title={`Target Number - First to ${match.targetNumber}`} />
       <MatchTable match={match} displayEndRound={minRoundOrZero() + 10} displayStartRound={minRoundOrZero()} />
       {!match.isComplete && <ScoreInput possibleScores={[1, 2, 3, 4, 5, 6]} onChange={onScoreChange} match={match} />}
       {match.isComplete && <MatchResult match={match} />}

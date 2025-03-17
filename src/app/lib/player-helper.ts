@@ -50,8 +50,7 @@ export const createPlayer = async (player: [Player]): Promise<Player> => {
 export const deletePlayer = async (player: Player): Promise<Player> => {
   return new Promise(async (resolve, reject) => {
     const players = await getPlayers();
-    const newPlayers = players.filter((p) => p.email !== player.email);
-
+    const newPlayers = players.filter((p) => p.id !== player.id);
     const url = `${baseUrl}/players`;
     fetch(url, {
       method: 'POST',

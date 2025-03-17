@@ -1,3 +1,5 @@
+"use client";
+import { useState } from "react";
 import styles from './TableRows.module.css';
 import { BsTrash3, BsPencil } from "react-icons/bs";
 import InputRow from '../InputRow/InputRow';
@@ -29,6 +31,8 @@ const TableRows = ({
   selectable,
   setAddMode,
 }: TableRowsProps) => {
+  const [selectedRows, setSelectedRows] = useState<number[]>([]);
+
   return (
     <tbody className={styles.tbody}>
       {rows.map((row, rowIndex) => (
@@ -45,7 +49,10 @@ const TableRows = ({
             <>
               {onRowAddClick && (
                 <td className={styles.td}>
-                  <button className={styles.button} onClick={(e) => onRowAddClick(row)}>Select</button>
+                  <button className={selectedRows.includes(rowIndex) ? styles.selected : styles.button} onClick={(e) => {
+                    onRowAddClick(row);
+                    setSelectedRows([...selectedRows, rowIndex]);
+                  }}>Select</button>
                 </td>
               )}
             </>

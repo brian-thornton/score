@@ -19,7 +19,7 @@ const PlayersPage = () => {
 
   const onSavePlayers = async (newPlayer: any) => {
     await createPlayer([newPlayer]);
-    setPlayers([...players, [newPlayer.name, newPlayer.email, newPlayer.phone]]);
+    loadPlayers();
   };
 
   const displayPlayers = players.map((player) => [player[1], player[2], player[3]]);
@@ -33,7 +33,6 @@ const PlayersPage = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.header}>Players</h1>
       <Table
         allowAdd
         columns={columns}

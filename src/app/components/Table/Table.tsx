@@ -59,7 +59,7 @@ const Table = ({
         {enableFilter && rows.length > 0 && <Filters columns={columns} onFilterChange={onFilterChange} />}
         <table className={styles.table}>
           <TableHeader columns={columns} editable={editable} deleteEnabled={deleteEnabled} />
-          {rows.length === 0 ? (
+          {rows.length === 0 && !addMode ? (
             <EmptyTable emptyText={emptyText} columns={columns} />
           ) : (
             <TableRows

@@ -1,12 +1,13 @@
 .container {
   background-color: #292929;
+  height: 100vh;
   padding: 10px;
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 
-.scoreButton {
+.controlButton {
   background-color: #333;
   border: none;
   color: white;
@@ -18,9 +19,9 @@
   margin: 4px 2px;
   cursor: pointer;
   height: 10vh;
-  width: 10vh;
+  width: 30vh;
 }
 
-.scoreButton:hover {
+.controlButton:hover {
   background-color: #4b4b4b;
 }
