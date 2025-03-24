@@ -8,7 +8,7 @@ export type Player = {
 export type MatchPlayer = {
   player: Player,
   score: number,
-  roundScores: number[],
+  roundScores: number[] | string[],
   isActive: boolean,
 };
 

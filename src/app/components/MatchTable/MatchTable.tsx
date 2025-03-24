@@ -64,19 +64,6 @@ const MatchTable = ({ match, displayEndRound, displayStartRound }: MatchTablePro
     return null;
   };
 
-  const fillEmptyCellsInDisplayRange = (player: MatchPlayer) => {
-    if (displayStartRound && displayEndRound) {
-      const emptyCells = Array.from({ length: displayEndRound - displayStartRound - player.roundScores.length }, (_, i) => i);
-
-      console.log(emptyCells);
-      return emptyCells.map((_, index) => (
-        <td className={cellStyle(player)} key={index}></td>
-      ));
-    }
-
-    return null;
-  }
-
   return (
     <div className={styles.container}>
       <table className={styles.table}>

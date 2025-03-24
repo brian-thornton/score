@@ -18,7 +18,7 @@
   margin: 4px 2px;
   cursor: pointer;
   height: 10vh;
-  width: 10vh;
+  /* width: 10vh;s */
 }
 
 .scoreButton:hover {

@@ -20,6 +20,9 @@ const Navbar = () => {
         <a href="/games/target-number" className={styles.navbarLink}>
           Target Number
         </a>
+        <a href="/games/target-goal" className={styles.navbarLink}>
+          Targets
+        </a>
       </div>
     </nav>
   );

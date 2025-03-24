@@ -1,0 +1,90 @@
+.container {
+  margin: 0 auto;
+  background-color: #4b4b4b;
+}
+
+.table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.tr {
+  background: #333;
+  color: #FFFFFF;
+  font-weight: 600;
+  padding: 1rem;
+  text-align: left;
+}
+
+.th {
+  background: #333;
+  color: #FFFFFF;
+  font-weight: 600;
+  padding: 1rem;
+  text-align: center;
+}
+
+.td {
+  color: #FFFFFF;
+  padding: 1rem;
+}
+
+.scoreCell {
+  background: #333;
+  color: #FFFFFF;
+  font-weight: 600;
+  padding: 1rem;
+  text-align: center;
+}
+
+.scoreCell:hover {
+  background: #4b4b4b;
+}
+
+.currentPlayer {
+  background: green;
+  color: #FFFFFF;
+  font-weight: 600;
+  padding: 1rem;
+  text-align: left;
+}
+
+.currentPlayerCell {
+  background: green;
+  color: #FFFFFF;
+  font-weight: 600;
+  padding: 1rem;
+  text-align: center;
+}
+
+.outlineCell {
+  background: #8e8e8e;
+  color: #FFFFFF;
+  font-weight: 600;
+  padding: 1rem;
+  text-align: center;
+}
+
+.activeCell {
+  background: red;
+  color: #FFFFFF;
+  font-weight: 600;
+  padding: 1rem;
+  text-align: center;
+}
+
+.activeRoundHeader {
+  background: #8e8e8e;
+  color: #FFFFFF;
+  font-weight: 600;
+  padding: 1rem;
+  text-align: center;
+}
+
+.winnerCell {
+  background: blue;
+  color: #FFFFFF;
+  font-weight: 600;
+  padding: 1rem;
+  text-align: center;
+}
