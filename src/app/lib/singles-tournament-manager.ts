@@ -1,5 +1,7 @@
 import { Match, MatchPlayer, MatchType, Player } from "@/app/lib/types";
 import { isRoundComplete, nextActivePlayer } from "./match-utils";
+import { saveMatchToHistory } from "./match-history-helper";
+import { v4 } from "uuid";
 
 export const createNewMatch = (players: Player[]): Match => {
   const matchPlayers = players.map((player) => ({
@@ -10,7 +12,7 @@ export const createNewMatch = (players: Player[]): Match => {
   }));
 
   return {
-    id: '1',
+    id: v4(),
     matchPlayers,
     currentPlayer: players[0],
     currentRound: 1,
@@ -100,5 +102,10 @@ export const updateScore = (match: Match, score: number): Match => {
     winner: isGameComplete(updatedMatchPlayers, match) ? matchWinner(updatedMatchPlayers) : null,
     maxRounds: isOvertime(updatedMatchPlayers, match.currentRound, match.maxRounds) ? match.maxRounds + 1 : match.maxRounds,
   };
+
+  if (isGameComplete(updatedMatchPlayers, match)) {
+    saveMatchToHistory(updatedMatch);
+  }
+
   return updatedMatch;
 };

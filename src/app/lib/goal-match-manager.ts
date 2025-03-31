@@ -1,5 +1,6 @@
 import { Match, MatchPlayer, MatchType, Player } from "@/app/lib/types";
 import { isRoundComplete, nextActivePlayer } from "./match-utils";
+import { v4 } from "uuid";
 
 export const createNewMatch = (players: Player[]): Match => {
   const matchPlayers = players.map((player) => ({
@@ -10,7 +11,7 @@ export const createNewMatch = (players: Player[]): Match => {
   }));
 
   return {
-    id: '1',
+    id: v4(),
     matchPlayers,
     currentPlayer: players[0],
     currentRound: 1,

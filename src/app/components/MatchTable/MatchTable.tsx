@@ -1,5 +1,6 @@
 import styles from './MatchTable.module.css';
 import { MatchPlayer, Match } from '@/app/lib/types';
+import { v4 } from 'uuid';
 
 type MatchTableProps = {
   match: Match;
@@ -24,31 +25,31 @@ const MatchTable = ({ match, displayEndRound, displayStartRound }: MatchTablePro
     const emptyCells = Array.from({ length: match.maxRounds - player.roundScores.length }, (_, i) => i);
 
     return emptyCells.map((_, index) => (
-      <td className={cellStyle(player)} key={index}></td>
+      <td className={cellStyle(player)} key={v4()}></td>
     ));
   };
 
   const renderHeaderDisplayRange = () => {
     if (displayStartRound && displayEndRound) {
       return Array.from({ length: displayEndRound - displayStartRound + 1 }, (_, i) => i).map((_, index) => (
-        <th className={match.currentRound === (index + displayStartRound) ? styles.activeRoundHeader : styles.th} key={index}>Round {index + displayStartRound}</th>
+        <th className={match.currentRound === (index + displayStartRound) ? styles.activeRoundHeader : styles.th} key={v4()}>Round {index + displayStartRound}</th>
       ));
     }
 
     return Array.from({ length: match.maxRounds }, (_, i) => i).map((_, index) => (
-      <th className={match.currentRound === (index + 1) ? styles.activeRoundHeader : styles.th} key={index}>Round {index + 1}</th>
+      <th className={match.currentRound === (index + 1) ? styles.activeRoundHeader : styles.th} key={v4()}>Round {index + 1}</th>
     ));
   };
 
   const renderScoreCellsInDisplayRange = (player: MatchPlayer) => {
     if (displayStartRound && displayEndRound) {
       return player.roundScores.slice(displayStartRound - 1, displayEndRound).map((score, index) => (
-        <td className={cellStyle(player)} key={index}>{score}</td>
+        <td className={cellStyle(player)} key={v4()}>{score}</td>
       ));
     }
 
     return player.roundScores.map((score, index) => (
-      <td className={cellStyle(player)} key={index}>{score}</td>
+      <td className={cellStyle(player)} key={v4()}>{score}</td>
     ));
   }
 
@@ -57,7 +58,7 @@ const MatchTable = ({ match, displayEndRound, displayStartRound }: MatchTablePro
       const emptyCells = Array.from({ length: displayEndRound - player.roundScores.length }, (_, i) => i);
 
       return emptyCells.map((_, index) => (
-        <td className={cellStyle(player)} key={index}></td>
+        <td className={cellStyle(player)} key={v4()}></td>
       ));
     }
 
@@ -76,12 +77,12 @@ const MatchTable = ({ match, displayEndRound, displayStartRound }: MatchTablePro
         </thead>
         <tbody>
           {match.matchPlayers.map((player) => (
-            <tr className={cellStyle(player)} key={player.player.id}>
-              <td className={styles.td}>{player.player.name}</td>
+            <tr className={cellStyle(player)} key={v4()}>
+              <td className={styles.td} key={v4()}>{player.player.name}</td>
               {renderScoreCellsInDisplayRange(player)}
               {!displayStartRound && fillEmptyCells(player)}
               {displayStartRound && fillEmptyCellsToDisplayEndRound(player)}
-              <td className={styles.td}>{player.roundScores.reduce((a, b) => a + b, 0)}</td>
+              <td className={styles.td} key={v4()}>{player.roundScores.reduce((a, b) => a + b, 0)}</td>
             </tr>
           ))}
         </tbody>

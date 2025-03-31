@@ -6,7 +6,7 @@ type MatchTableProps = {
 }
 
 const MatchGoalTable = ({ match }: MatchTableProps) => {
-  const headers = ['Upper Left', 'Upper Right', 'Center Bottom', 'Lower Right', 'Center Top', 'Lower Left'];
+  const headers = ['Upper Left', 'Center Bottom', 'Upper Right', 'Lower Right', 'Center Top', 'Lower Left'];
   console.log(match)
   const cellStyle = (player: MatchPlayer) => {
     console.log(player)

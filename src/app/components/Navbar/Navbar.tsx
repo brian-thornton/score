@@ -23,6 +23,9 @@ const Navbar = () => {
         <a href="/games/target-goal" className={styles.navbarLink}>
           Targets
         </a>
+        <a href="/match-history" className={styles.navbarLink}>
+          Match History
+        </a>
       </div>
     </nav>
   );
