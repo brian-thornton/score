@@ -39,8 +39,9 @@
   border-radius: 5px;
   border: 1px solid darkgray;
   color: #FFFFFF;
-  height: 50px;
+  height: 85px;
   padding: 5px;
   width: 25%;
-  margin-top: 20px;
+  font-size: 40px;
+  margin-top: 10px;
 }

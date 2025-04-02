@@ -45,7 +45,7 @@ const Table = ({
   const [rows, setRows] = useState<any[]>(data);
 
   const onFilterChange = (column: string, filter: string) => {
-    setRows(data.filter((row) => row[columns.indexOf(column)].includes(filter)));
+    setRows(data.filter((row) => row[columns.indexOf(column)].toLowerCase().includes(filter.toLowerCase())));
   };
 
   useEffect(() => {
