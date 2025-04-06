@@ -65,20 +65,19 @@ export const updateScore = (match: Match, score: number): Match => {
   const updatedMatch = {
     ...match,
     matchPlayers: updatedMatchPlayers,
-    currentPlayer: isGameComplete(updatedMatchPlayers, match.targetNumber) ? null : {
+    currentPlayer: match.targetNumber !== undefined && isGameComplete(updatedMatchPlayers, match.targetNumber) ? null : {
       email: nextPlayer.player.email,
       id: nextPlayer.player.id,
       name: nextPlayer.player.name,
       phone: nextPlayer.player.phone
     },
     currentRound: nextRound,
-    isComplete: isGameComplete(updatedMatchPlayers, match.targetNumber),
+    isComplete: match.targetNumber !== undefined && isGameComplete(updatedMatchPlayers, match.targetNumber),
     winner: isGameComplete(updatedMatchPlayers, match.targetNumber) ? matchWinner(updatedMatchPlayers, match.targetNumber) : null,
     maxRounds: match.maxRounds,
   };
 
   if (isGameComplete(updatedMatchPlayers, match.targetNumber)) {
-    alert('here yo')
     saveMatchToHistory(updatedMatch);
   }
 

@@ -82,7 +82,7 @@ const MatchTable = ({ match, displayEndRound, displayStartRound }: MatchTablePro
               {renderScoreCellsInDisplayRange(player)}
               {!displayStartRound && fillEmptyCells(player)}
               {displayStartRound && fillEmptyCellsToDisplayEndRound(player)}
-              <td className={styles.td} key={v4()}>{player.roundScores.reduce((a, b) => a + b, 0)}</td>
+              <td className={styles.td} key={v4()}>{player.roundScores.reduce((a, b) => Number(a) + Number(b), 0)}</td>
             </tr>
           ))}
         </tbody>

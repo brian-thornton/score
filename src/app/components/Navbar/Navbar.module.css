@@ -38,4 +38,5 @@
 .navbarRight {
   display: flex;
   align-items: flex-end;
+  width: 27vw;
 }

@@ -44,3 +44,24 @@ export const saveMatchToHistory = async (match: [Match]): Promise<Match> => {
       });
   });
 };
+
+export const clearMatchHistory = async (): Promise<void> => {
+  return new Promise(async (resolve, reject) => {
+    const url = `${baseUrl}/match-history`;
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({matchHistory: []}),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        resolve(data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+

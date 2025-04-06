@@ -9,6 +9,7 @@ import GameHeader from "@/app/components/GameHeader/GameHeader";
 import { getPlayers } from "@/app/lib/player-helper";
 import Table from "@/app/components/Table/Table";
 import MatchGoalTable from "@/app/components/MatchGoalTable/MatchGoalTable";
+import TargetList from "@/app/components/TargetList/TargetList";
 
 import { createNewMatch, updateScore } from "@/app/lib/goal-match-manager";
 
@@ -18,6 +19,7 @@ const TargetGoalPage = () => {
   const [match, setMatch] = useState<Match>();
   const columns = ["Name", "email", "Phone"];
   const displayPlayers = players.map((player) => [player.name, player.email, player.phone]);
+  const [possibleScores, setPOssibleScores] = useState<string[]>([]);
 
   const loadPlayers = async () => {
     const data = await getPlayers();
@@ -42,8 +44,6 @@ const TargetGoalPage = () => {
     window.location.reload();
   }
 
-  const possibleScores = ['Upper Left', 'Lower Left', 'Center Top', 'Center Bottom', 'Upper Right', 'Lower Right', 'Miss'];
-
   const onScoreChange = (match: Match, score: string, possibleScores: string[]) => {
     console.log(possibleScores);
     const updatedMatch = updateScore(match, score, possibleScores);
@@ -53,7 +53,7 @@ const TargetGoalPage = () => {
   return match ? (
     <div className={styles.container}>
       <GameHeader title="Target Goal" />
-      <MatchGoalTable match={match} />
+      <MatchGoalTable match={match} headers={possibleScores}/>
       {!match.isComplete && (
         <>
           <ScoreInput possibleScores={possibleScores} match={match} onChange={onScoreChange} />
@@ -87,6 +87,7 @@ const TargetGoalPage = () => {
         selectable
         onRowAddClick={onMatchPlayerAdd}
       />
+      <TargetList onTargetsChange={setPOssibleScores} />
       <div className={styles.controlsRow}>
         <button
           disabled={matchPlayers.length === 0}

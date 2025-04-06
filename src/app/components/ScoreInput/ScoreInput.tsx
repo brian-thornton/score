@@ -11,7 +11,11 @@ const ScoreInput = ({ match, possibleScores, onChange }: ScoreInputProps) => {
   return (
     <div className={styles.container}>
       {possibleScores.map((score) => (
-        <button className={styles.scoreButton} key={score} onClick={() => onChange(match, score, possibleScores)}>
+        <button
+          className={styles.scoreButton}
+          key={score}
+          onClick={() => onChange(match, score, Array.isArray(possibleScores) ? possibleScores.map(String) : undefined)}
+        >
           {score}
         </button>
       ))}

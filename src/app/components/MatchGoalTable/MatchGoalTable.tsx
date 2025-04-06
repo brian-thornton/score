@@ -3,13 +3,12 @@ import { MatchPlayer, Match } from '@/app/lib/types';
 
 type MatchTableProps = {
   match: Match;
+  headers?: string[];
 }
 
-const MatchGoalTable = ({ match }: MatchTableProps) => {
-  const headers = ['Upper Left', 'Center Bottom', 'Upper Right', 'Lower Right', 'Center Top', 'Lower Left'];
-  console.log(match)
+const MatchGoalTable = ({ match, headers }: MatchTableProps) => {
+  console.log(headers)
   const cellStyle = (player: MatchPlayer) => {
-    console.log(player)
     if (match.winner && player.player.id === match.winner.player.id) {
       return styles.winnerCell;
     }
