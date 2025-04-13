@@ -3,7 +3,7 @@ import styles from './Filters.module.css';
 type FilterProps = {
   columns: string[];
   onFilterChange: (column: string, filter: string) => void;
-}
+};
 
 const Filters = ({ columns, onFilterChange }: FilterProps) => {
   return (

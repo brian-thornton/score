@@ -7,7 +7,6 @@ type MatchTableProps = {
 }
 
 const MatchGoalTable = ({ match, headers }: MatchTableProps) => {
-  console.log(headers)
   const cellStyle = (player: MatchPlayer) => {
     if (match.winner && player.player.id === match.winner.player.id) {
       return styles.winnerCell;
@@ -26,7 +25,7 @@ const MatchGoalTable = ({ match, headers }: MatchTableProps) => {
         <thead>
           <tr className={styles.tr}>
             <th className={styles.th}>Player</th>
-            {headers.map((header, index) => (
+            {headers?.map((header, index) => (
               <th className={styles.th} key={index}>{header}</th>
             ))}
           </tr>
@@ -35,7 +34,7 @@ const MatchGoalTable = ({ match, headers }: MatchTableProps) => {
           {match.matchPlayers.map((player) => (
             <tr className={cellStyle(player)} key={player.player.id}>
               <td className={styles.td}>{player.player.name}</td>
-              {headers.map((h, index) => (
+              {headers?.map((h, index) => (
                 <td className={cellStyle(player)} key={index}>
                   {player.roundScores.includes(h) ? 'X' : ''}
                 </td>

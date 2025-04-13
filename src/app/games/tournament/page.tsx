@@ -8,8 +8,9 @@ import MatchResult from "@/app/components/MatchResult/MatchResult";
 import GameHeader from "@/app/components/GameHeader/GameHeader";
 import { getPlayers } from "@/app/lib/player-helper";
 import Table from "@/app/components/Table/Table";
+import ScoreEdit from "@/app/components/ScoreEdit/ScoreEdit";
 
-import { createNewMatch, updateScore } from "@/app/lib/singles-tournament-manager";
+import { createNewMatch, updateScore, editScore } from "@/app/lib/singles-tournament-manager";
 
 const TournamentPage = () => {
   const [players, setPlayers] = useState<string[][]>([[]]);
@@ -17,6 +18,8 @@ const TournamentPage = () => {
   const [match, setMatch] = useState<Match>();
   const columns = ["Name", "email", "Phone"];
   const displayPlayers = players.map((player) => [player.name, player.email, player.phone]);
+  const [editRound, setEditRound] = useState<number>(0);
+  const [editPlayer, setEditPlayer] = useState();
 
   const loadPlayers = async () => {
     const data = await getPlayers();
@@ -28,6 +31,11 @@ const TournamentPage = () => {
   }, []);
 
   const onScoreChange = (match: Match, score: number) => {
+    const updatedMatch = updateScore(match, score);
+    setMatch(updatedMatch);
+  }
+
+  const onEditScoreSave = (score: number) => {
     const updatedMatch = updateScore(match, score);
     setMatch(updatedMatch);
   }
@@ -46,11 +54,36 @@ const TournamentPage = () => {
     setMatch(createNewMatch(matchPlayers));
   };
 
+  const onScoreClick = (player: any, round: number) => {
+    setEditPlayer(player);
+    setEditRound(round);
+  };
+
+  if (editPlayer) {
+    return (
+      <div className={styles.container}>
+        <GameHeader title="Edit Score" />
+        <ScoreEdit
+          onSave={(score) => {
+            const updatedMatch = editScore(match, editPlayer, editRound, score);
+            setMatch(updatedMatch);
+            setEditPlayer(undefined);
+          }}
+          onCancel={() => setEditPlayer(undefined)}
+          currentScore={editPlayer.roundScores[editRound - 1]}
+          round={`Round ${editRound}`}
+          playerName={editPlayer.player.name}
+          possibleScores={[0, 1, 2, 3, 4, 5, 6]}
+        />
+      </div>
+    );
+  };
+
   return (
     match ? (
       <div className={styles.container}>
         <GameHeader title="Singles Match" />
-        <MatchTable match={match} />
+        <MatchTable match={match} onScoreClick={onScoreClick} />
         {!match.isComplete && (
           <>
             <ScoreInput possibleScores={[0, 1, 2, 3, 4, 5, 6]} onChange={onScoreChange} match={match} />

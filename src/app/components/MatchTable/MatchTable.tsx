@@ -6,9 +6,10 @@ type MatchTableProps = {
   match: Match;
   displayStartRound?: number;
   displayEndRound?: number;
+  onScoreClick?: (player: MatchPlayer, round: number) => void;
 }
 
-const MatchTable = ({ match, displayEndRound, displayStartRound }: MatchTableProps) => {
+const MatchTable = ({ match, displayEndRound, displayStartRound, onScoreClick }: MatchTableProps) => {
   const cellStyle = (player: MatchPlayer) => {
     if (match.winner && player.player.id === match.winner.player.id) {
       return styles.winnerCell;
@@ -44,12 +45,12 @@ const MatchTable = ({ match, displayEndRound, displayStartRound }: MatchTablePro
   const renderScoreCellsInDisplayRange = (player: MatchPlayer) => {
     if (displayStartRound && displayEndRound) {
       return player.roundScores.slice(displayStartRound - 1, displayEndRound).map((score, index) => (
-        <td className={cellStyle(player)} key={v4()}>{score}</td>
+        <td className={cellStyle(player)} key={v4()} onClick={() => onScoreClick(player, index + 1)}>{score}</td>
       ));
     }
 
     return player.roundScores.map((score, index) => (
-      <td className={cellStyle(player)} key={v4()}>{score}</td>
+      <td onClick={() => onScoreClick(player, index + 1)} className={cellStyle(player)} key={v4()}>{score}</td>
     ));
   }
 

@@ -1,4 +1,4 @@
-import { Match, MatchPlayer, MatchType, Player } from "@/app/lib/types";
+import { MatchPlayer, Player } from "@/app/lib/types";
 
 export const isRoundComplete = (matchPlayers: MatchPlayer[], currentRound: number): boolean => {
   const activePlayers = matchPlayers.filter((player) => player.isActive);

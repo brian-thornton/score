@@ -3,7 +3,6 @@ import { isRoundComplete, nextActivePlayer } from "./match-utils";
 import { v4 } from "uuid";
 import { saveMatchToHistory } from "./match-history-helper";
 
-
 export const createNewMatch = (players: Player[]): Match => {
   const matchPlayers = players.map((player) => ({
     player,
