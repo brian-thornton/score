@@ -8,8 +8,9 @@ import MatchResult from "@/app/components/MatchResult/MatchResult";
 import GameHeader from "@/app/components/GameHeader/GameHeader";
 import { getPlayers } from "@/app/lib/player-helper";
 import Table from "@/app/components/Table/Table";
+import ScoreEdit from "@/app/components/ScoreEdit/ScoreEdit";
 
-import { createNewMatch, updateScore } from "@/app/lib/target-number-manager";
+import { createNewMatch, updateScore, editScore } from "@/app/lib/target-number-manager";
 
 const TargetNumberPage = () => {
   const [players, setPlayers] = useState<string[][]>([[]]);
@@ -18,6 +19,8 @@ const TargetNumberPage = () => {
   const [targetNumber, setTargetNumber] = useState<number>(21);
   const columns = ["Name", "email", "Phone"];
   const displayPlayers = players.map((player) => [player.name, player.email, player.phone]);
+  const [editRound, setEditRound] = useState<number>(0);
+  const [editPlayer, setEditPlayer] = useState();
 
   const loadPlayers = async () => {
     const data = await getPlayers();
@@ -31,13 +34,17 @@ const TargetNumberPage = () => {
   const onMatchPlayerAdd = async (rowObject: any) => {
     const player = players.find((player) => player.email === rowObject[1]);
     setMatchPlayers([...matchPlayers, player]);
-    console.log(player);
   }
 
   const onScoreChange = (match: Match, score: number) => {
     const updatedMatch = updateScore(match, score);
     setMatch(updatedMatch);
   }
+
+  const onScoreClick = (player: any, round: number) => {
+    setEditPlayer(player);
+    setEditRound(round);
+  };
 
   const onStartMatch = () => {
     setMatch(createNewMatch(matchPlayers, targetNumber));
@@ -54,10 +61,30 @@ const TargetNumberPage = () => {
     window.location.reload();
   }
 
+  if (editPlayer) {
+    return (
+      <div className={styles.container}>
+        <GameHeader title="Edit Score" />
+        <ScoreEdit
+          onSave={(score) => {
+            const updatedMatch = editScore(match, editPlayer, editRound, score);
+            setMatch(updatedMatch);
+            setEditPlayer(undefined);
+          }}
+          onCancel={() => setEditPlayer(undefined)}
+          currentScore={editPlayer.roundScores[editRound - 1]}
+          round={`Round ${editRound}`}
+          playerName={editPlayer.player.name}
+          possibleScores={[0, 1, 2, 3, 4, 5, 6]}
+        />
+      </div>
+    );
+  };
+
   return match ? (
     <div className={styles.container}>
       <GameHeader title={`Target Number - First to ${match.targetNumber}`} />
-      <MatchTable match={match} displayEndRound={minRoundOrZero() + 10} displayStartRound={minRoundOrZero()} />
+      <MatchTable onScoreClick={onScoreClick} match={match} displayEndRound={minRoundOrZero() + 10} displayStartRound={minRoundOrZero()} />
       {!match.isComplete && (
         <>
           <ScoreInput possibleScores={[0, 1, 2, 3, 4, 5, 6]} onChange={onScoreChange} match={match} />

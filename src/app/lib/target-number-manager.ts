@@ -33,6 +33,34 @@ const matchWinner = (matchPlayers: MatchPlayer[], targetNumber: number): MatchPl
   return matchPlayers.find((player) => player.score === maxScore && player.score >= targetNumber) || null;
 }
 
+export const editScore = (match: Match, player: MatchPlayer, round: number, score: number): Match => {
+  const updatedMatchPlayers = match.matchPlayers.map((matchPlayer) => {
+    if (matchPlayer.player.id === player.player.id) {
+      const updatedRoundScores = [...matchPlayer.roundScores];
+      updatedRoundScores[round - 1] = score;
+      return {
+        ...matchPlayer,
+        roundScores: updatedRoundScores,
+        score: updatedRoundScores.reduce((total, roundScore) => total + roundScore, 0),
+      };
+    }
+    return matchPlayer;
+  });
+
+  const updatedMatch = {
+    ...match,
+    matchPlayers: updatedMatchPlayers,
+    isComplete: isGameComplete(updatedMatchPlayers, match),
+    winner: isGameComplete(updatedMatchPlayers, match) ? matchWinner(updatedMatchPlayers) : null,
+  };
+
+  if (isGameComplete(updatedMatchPlayers, match)) {
+    saveMatchToHistory(updatedMatch);
+  }
+
+  return updatedMatch;
+};
+
 export const updateScore = (match: Match, score: number): Match => {
   if (isGameComplete(match.matchPlayers, match.targetNumber)) {
     return match;

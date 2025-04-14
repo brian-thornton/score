@@ -35,11 +35,6 @@ const TournamentPage = () => {
     setMatch(updatedMatch);
   }
 
-  const onEditScoreSave = (score: number) => {
-    const updatedMatch = updateScore(match, score);
-    setMatch(updatedMatch);
-  }
-
   const onMatchPlayerAdd = async (rowObject: any) => {
     const player = players.find((player) => player.email === rowObject[1]);
     setMatchPlayers([...matchPlayers, player]);
