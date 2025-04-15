@@ -4,14 +4,18 @@ import { useState, useEffect } from "react";
 import styles from "./TargetList.module.css";
 
 type TargetListProps = {
-  onTargetsChange: (targets: string[]) => void;
+  onTargetsChange: (targets) => void;
 };
 
 const TargetList = ({ onTargetsChange }: TargetListProps) => {
   const [targetList, setTargetList] = useState([]);
+  const [targetSetName, setTargetSetName] = useState("");
 
   useEffect(() => {
-    onTargetsChange(targetList);
+    onTargetsChange({
+      name: targetSetName,
+      targetList: targetList,
+    });
   }, [targetList]);
 
   const addTarget = (target) => {
@@ -33,6 +37,12 @@ const TargetList = ({ onTargetsChange }: TargetListProps) => {
           </li>
         ))}
       </ul>
+      <input
+        className={styles.input}
+        type="text"
+        placeholder="Target Set Name"
+        onChange={(e) => setTargetSetName(e.target.value)}
+      />
       <input
         className={styles.input}
         type="text"
