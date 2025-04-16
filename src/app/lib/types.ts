@@ -33,8 +33,13 @@ export type Match = {
   maxRounds: number,
   isComplete: boolean,
   winner?: MatchPlayer | null | undefined,
-  overtime: boolean,
+  overtime?: boolean,
   targetNumber?: number,
 };
+
+export type TargetSet = {
+  name: string,
+  targets?: string[],
+}
 
 export default Player;

@@ -1,20 +1,9 @@
 import { Player } from './types';
+import { get } from './fetch-helper';
 
 const baseUrl = 'http://localhost:3000/api';
 
-export const getPlayers = (): Promise<Player[]> => {
-  return new Promise((resolve, reject) => {
-    const url = `${baseUrl}/players`;
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        resolve(data);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
-};
+export const getPlayers = (): Promise<Player[]> => get(`${baseUrl}/players`);
 
 export const createPlayer = async (player: [Player]): Promise<Player> => {
   return new Promise(async (resolve, reject) => {

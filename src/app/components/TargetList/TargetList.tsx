@@ -2,27 +2,28 @@
 import { useState, useEffect } from "react";
 
 import styles from "./TargetList.module.css";
+import { TargetSet } from "@/app/lib/types";
 
 type TargetListProps = {
-  onTargetsChange: (targets) => void;
+  onTargetsChange: (targets: TargetSet) => void;
 };
 
 const TargetList = ({ onTargetsChange }: TargetListProps) => {
-  const [targetList, setTargetList] = useState([]);
+  const [targetList, setTargetList] = useState<string[]>([]);
   const [targetSetName, setTargetSetName] = useState("");
 
   useEffect(() => {
     onTargetsChange({
       name: targetSetName,
-      targetList: targetList,
+      targets: targetList,
     });
   }, [targetList]);
 
-  const addTarget = (target) => {
+  const addTarget = (target: string) => {
     setTargetList([...targetList, target]);
   };
 
-  const removeTarget = (target) => {
+  const removeTarget = (target: string) => {
     setTargetList(targetList.filter((t) => t !== target));
   };
 

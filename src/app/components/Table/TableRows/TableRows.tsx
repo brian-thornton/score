@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
-import styles from './TableRows.module.css';
 import { BsTrash3, BsPencil } from "react-icons/bs";
+
+import styles from './TableRows.module.css';
 import InputRow from '../InputRow/InputRow';
 
 type TableRowsProps = {

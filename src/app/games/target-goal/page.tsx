@@ -20,7 +20,7 @@ const TargetGoalPage = () => {
   const [match, setMatch] = useState<Match>();
   const columns = ["Name", "email", "Phone"];
   const displayPlayers = players.map((player) => [player.name, player.email, player.phone]);
-  const [possibleScores, setPOssibleScores] = useState<string[]>([]);
+  const [possibleScores, setPossibleScores] = useState<string[]>([]);
 
   const loadPlayers = async () => {
     const data = await getPlayers();
@@ -52,7 +52,7 @@ const TargetGoalPage = () => {
   };
 
   const onTargetListChange = (targetSet) => {
-    setPOssibleScores(targetSet.targetList);
+    setPossibleScores(targetSet.targetList);
     createTargetSet(targetSet);
     console.log(targetSet);
   }

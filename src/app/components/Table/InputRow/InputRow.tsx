@@ -1,8 +1,8 @@
 "use client";
 import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import styles from './InputRow.module.css';
-import { v4 as uuidv4 } from 'uuid';
 
 type InputRowProps = {
   columns: string[];
