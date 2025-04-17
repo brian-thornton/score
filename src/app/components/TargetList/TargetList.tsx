@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 
 import styles from "./TargetList.module.css";
 import { TargetSet } from "@/app/lib/types";
+import { v4 } from "uuid";
 
 type TargetListProps = {
   onTargetsChange: (targets: TargetSet) => void;
@@ -30,14 +31,14 @@ const TargetList = ({ onTargetsChange }: TargetListProps) => {
   return (
     <div className={styles.container}>
       <h2 className={styles.header}>Target List</h2>
-      <ul className={styles.targetList}>
+      <div className={styles.targetRow}>
         {targetList.map((target, index) => (
-          <li key={index} className={styles.targetItem}>
+          <div className={styles.targetItem} key={v4()}>
             {target}
-            <button onClick={() => removeTarget(target)} className={styles.removeButton}>Remove</button>
-          </li>
+            <button onClick={() => removeTarget(target)} className={styles.removeButton}>X</button>
+          </div>
         ))}
-      </ul>
+      </div>
       <input
         className={styles.input}
         type="text"
@@ -55,7 +56,7 @@ const TargetList = ({ onTargetsChange }: TargetListProps) => {
           }
         }}
       />
-    </div>
+    </div >
   );
 };
 

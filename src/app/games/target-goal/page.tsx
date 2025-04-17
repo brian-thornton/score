@@ -12,6 +12,7 @@ import MatchGoalTable from "@/app/components/MatchGoalTable/MatchGoalTable";
 import TargetList from "@/app/components/TargetList/TargetList";
 import { createTargetSet } from "@/app/lib/target-set-helper";
 
+
 import { createNewMatch, updateScore } from "@/app/lib/goal-match-manager";
 
 const TargetGoalPage = () => {
@@ -52,9 +53,8 @@ const TargetGoalPage = () => {
   };
 
   const onTargetListChange = (targetSet) => {
-    setPossibleScores(targetSet.targetList);
+    setPossibleScores(targetSet.targets);
     createTargetSet(targetSet);
-    console.log(targetSet);
   }
 
   return match ? (
