@@ -50,7 +50,11 @@ const MatchTable = ({ match, displayEndRound, displayStartRound, onScoreClick }:
     }
 
     return player.roundScores.map((score, index) => (
-      <td onClick={() => onScoreClick(player, index + 1)} className={cellStyle(player)} key={v4()}>{score}</td>
+      <td
+        onClick={() => onScoreClick ? onScoreClick(player, index + 1) : () => { }}
+        className={cellStyle(player)} key={v4()}>
+        {score}
+      </td>
     ));
   }
 

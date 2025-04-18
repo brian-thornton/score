@@ -13,6 +13,9 @@ const Navbar = () => {
         <a href="/players" className={styles.navbarLink}>
           Players
         </a>
+        <a href="/players" className={styles.navbarLink}>
+          Teams
+        </a>
         <a href="/games/tournament" className={styles.navbarLink}>
           Tournament
         </a>

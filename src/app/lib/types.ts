@@ -35,7 +35,12 @@ export type Match = {
   winner?: MatchPlayer | null | undefined,
   overtime?: boolean,
   targetNumber?: number,
+  possibleScores?: string[],
 };
+
+export type MatchHistory = {
+  matchHistory: Match[]
+}
 
 export type TargetSet = {
   name: string,

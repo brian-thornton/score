@@ -1,27 +1,10 @@
 import { Match, MatchPlayer, MatchType, Player } from "@/app/lib/types";
 import { isRoundComplete, nextActivePlayer } from "./match-utils";
 import { saveMatchToHistory } from "./match-history-helper";
-import { v4 } from "uuid";
+import { initMatch } from "./game-helper";
 
 export const createNewMatch = (players: Player[], targetNumber: number): Match => {
-  const matchPlayers = players.map((player) => ({
-    player,
-    score: 0,
-    roundScores: [],
-    isActive: true,
-  }));
-
-  return {
-    id: v4(),
-    matchPlayers,
-    currentPlayer: players[0],
-    currentRound: 1,
-    matchType: MatchType.TARGET_NUMBER,
-    maxRounds: 100,
-    isComplete: false,
-    winner: null,
-    targetNumber,
-  };
+  return initMatch(players, MatchType.TARGET_NUMBER, 100, targetNumber);
 };
 
 const isGameComplete = (matchPlayers: MatchPlayer[], targetNumber: number): boolean => {

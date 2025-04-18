@@ -1,25 +1,10 @@
 import { Match, MatchPlayer, MatchType, Player } from "@/app/lib/types";
 import { isRoundComplete, nextActivePlayer } from "./match-utils";
 import { saveMatchToHistory } from "./match-history-helper";
-import { v4 } from "uuid";
+import { initMatch } from "./game-helper";
 
 export const createNewMatch = (players: Player[]): Match => {
-  const matchPlayers = players.map((player) => ({
-    player,
-    score: 0,
-    roundScores: [],
-    isActive: true,
-  }));
-
-  return {
-    id: v4(),
-    matchPlayers,
-    currentPlayer: players[0],
-    currentRound: 1,
-    matchType: MatchType.SINGLES_TOURNAMENT,
-    maxRounds: 10,
-    isComplete: false,
-  };
+  return initMatch(players, MatchType.SINGLES_TOURNAMENT, 10);
 };
 
 const isGameComplete = (matchPlayers: MatchPlayer[], match: Match): boolean => {

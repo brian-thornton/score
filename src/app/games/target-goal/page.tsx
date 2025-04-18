@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import MatchTable from "@/app/components/MatchTable/MatchTable";
 import ScoreInput from "@/app/components/ScoreInput/ScoreInput";
 import { Match } from "@/app/lib/types";
 import styles from "./page.module.css";
@@ -11,8 +10,6 @@ import Table from "@/app/components/Table/Table";
 import MatchGoalTable from "@/app/components/MatchGoalTable/MatchGoalTable";
 import TargetList from "@/app/components/TargetList/TargetList";
 import { createTargetSet } from "@/app/lib/target-set-helper";
-
-
 import { createNewMatch, updateScore } from "@/app/lib/goal-match-manager";
 
 const TargetGoalPage = () => {

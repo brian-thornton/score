@@ -81,7 +81,7 @@ const TournamentPage = () => {
         <MatchTable match={match} onScoreClick={onScoreClick} />
         {!match.isComplete && (
           <>
-            <ScoreInput possibleScores={[0, 1, 2, 3, 4, 5, 6]} onChange={onScoreChange} match={match} />
+            <ScoreInput possibleScores={[0, 1, 2, 3, 4, 6, 8, 10]} onChange={onScoreChange} match={match} />
             <button className={styles.controlButton} onClick={endMatch}>End Match</button>
           </>
         )}

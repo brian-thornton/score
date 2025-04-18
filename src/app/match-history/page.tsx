@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 import { getMatchHistory } from "../lib/match-history-helper";
 import MatchTable from "../components/MatchTable/MatchTable";
 import styles from "./page.module.css";
-import Match from "../lib/types";
+import { Match, MatchHistory } from "../lib/types";
 import { clearMatchHistory } from "../lib/match-history-helper";
 import Confirm from "../components/Confirm/Confirm";
 import MatchGoalTable from "../components/MatchGoalTable/MatchGoalTable";
 
 const MatchHistoryPage = () => {
-  const [matchHistory, setMatchHistory] = useState([]);
+  const [matchHistory, setMatchHistory] = useState<MatchHistory>();
   const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
 
   const loadMatchHistory = async () => {
@@ -32,7 +32,7 @@ const MatchHistoryPage = () => {
     return maxRounds;
   };
 
-  const getFirstRound = (maxRounds) => {
+  const getFirstRound = (maxRounds: number) => {
     if (maxRounds - 10 < 0) {
       return 1;
     }

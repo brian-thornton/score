@@ -16,9 +16,8 @@ export const getTargetSets = (): Promise<Player[]> => {
   });
 };
 
-export const createTargetSet = async (targetSet): Promise<Player> => {
+export const createTargetSet = async (targetSet: string[]): Promise<Player> => {
   return new Promise(async (resolve, reject) => {
-
     let targetSets = await getTargetSets();
 
     if (targetSets && targetSets.length > 0) {
