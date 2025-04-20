@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
-import Table from "../components/Table/Table";
-import { createTeam, deleteTeam, getTeams } from "../lib/teams-helper";
-import { Team } from "../lib/types";
+import Table from "../../components/Table/Table";
+import { createTeam, deleteTeam, getTeams } from "../../lib/api-clients/teams-helper";
+import { Team } from "../../lib/types";
 import styles from "./page.module.css";
 
 const TeamsPage = () => {

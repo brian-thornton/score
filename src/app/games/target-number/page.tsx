@@ -6,7 +6,7 @@ import { Match } from "@/app/lib/types";
 import styles from "./page.module.css";
 import MatchResult from "@/app/components/MatchResult/MatchResult";
 import GameHeader from "@/app/components/GameHeader/GameHeader";
-import { getPlayers } from "@/app/lib/player-helper";
+import { getPlayers } from "@/app/lib/api-clients/player-helper";
 import Table from "@/app/components/Table/Table";
 import ScoreEdit from "@/app/components/ScoreEdit/ScoreEdit";
 

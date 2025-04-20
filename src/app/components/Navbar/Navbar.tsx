@@ -10,10 +10,10 @@ const Navbar = () => {
         </a>
       </div>
       <div className={styles.navbarRight}>
-        <a href="/players" className={styles.navbarLink}>
+        <a href="/player-admin/players" className={styles.navbarLink}>
           Players
         </a>
-        <a href="/players" className={styles.navbarLink}>
+        <a href="/player-admin/teams" className={styles.navbarLink}>
           Teams
         </a>
         <a href="/games/tournament" className={styles.navbarLink}>

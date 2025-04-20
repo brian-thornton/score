@@ -1,4 +1,4 @@
-import { Match, MatchHistory } from './types';
+import { Match, MatchHistory } from '../types';
 import { get, post } from './fetch-helper';
 
 const baseUrl = '/api';

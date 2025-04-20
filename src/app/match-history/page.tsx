@@ -1,10 +1,10 @@
 "use client"
 import { useEffect, useState } from "react";
-import { getMatchHistory } from "../lib/match-history-helper";
+import { getMatchHistory } from "../lib/api-clients/match-history-helper";
 import MatchTable from "../components/MatchTable/MatchTable";
 import styles from "./page.module.css";
 import { Match, MatchHistory } from "../lib/types";
-import { clearMatchHistory } from "../lib/match-history-helper";
+import { clearMatchHistory } from "../lib/api-clients/match-history-helper";
 import Confirm from "../components/Confirm/Confirm";
 import MatchGoalTable from "../components/MatchGoalTable/MatchGoalTable";
 

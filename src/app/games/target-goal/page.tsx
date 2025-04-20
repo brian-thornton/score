@@ -6,11 +6,11 @@ import { Match, TargetSet } from "@/app/lib/types";
 import styles from "./page.module.css";
 import MatchResult from "@/app/components/MatchResult/MatchResult";
 import GameHeader from "@/app/components/GameHeader/GameHeader";
-import { getPlayers } from "@/app/lib/player-helper";
+import { getPlayers } from "@/app/lib/api-clients/player-helper";
 import Table from "@/app/components/Table/Table";
 import MatchGoalTable from "@/app/components/MatchGoalTable/MatchGoalTable";
 import TargetList from "@/app/components/TargetList/TargetList";
-import { createTargetSet } from "@/app/lib/target-set-helper";
+import { createTargetSet } from "@/app/lib/api-clients/target-set-helper";
 import { createNewMatch, updateScore } from "@/app/lib/goal-match-manager";
 
 const TargetGoalPage = () => {

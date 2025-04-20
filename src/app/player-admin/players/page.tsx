@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
-import Table from "../components/Table/Table";
+import Table from "../../components/Table/Table";
 import styles from "./page.module.css";
-import { createPlayer, deletePlayer, getPlayers } from "../lib/player-helper";
+import { createPlayer, deletePlayer, getPlayers } from "../../lib/api-clients/player-helper";
 
 const PlayersPage = () => {
   const columns = ["Name", "email", "Phone"];

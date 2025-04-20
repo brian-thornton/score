@@ -1,4 +1,4 @@
-import { Player } from './types';
+import { Player } from '../types';
 import { get, post } from './fetch-helper';
 
 const baseUrl = '/api';

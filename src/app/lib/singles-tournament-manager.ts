@@ -1,6 +1,6 @@
 import { Match, MatchPlayer, MatchType, Player } from "@/app/lib/types";
 import { isRoundComplete, nextActivePlayer } from "./match-utils";
-import { saveMatchToHistory } from "./match-history-helper";
+import { saveMatchToHistory } from "./api-clients/match-history-helper";
 import { initMatch } from "./game-helper";
 
 export const createNewMatch = (players: Player[]): Match => {
