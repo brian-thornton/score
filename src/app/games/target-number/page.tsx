@@ -119,7 +119,12 @@ const TargetNumberPage = () => {
         onRowAddClick={onMatchPlayerAdd}
       />
       <div className={styles.controlsRow}>
-        <input className={styles.targetNumberInput} type="text" placeholder="Target" onChange={(e) => setTargetNumber(parseInt(e.target.value))} />
+        <input
+          className={styles.targetNumberInput}
+          type="text"
+          placeholder="Target"
+          onChange={(e) => setTargetNumber(parseInt(e.target.value))}
+        />
         <button
           disabled={matchPlayers.length === 0}
           className={styles.controlButton}

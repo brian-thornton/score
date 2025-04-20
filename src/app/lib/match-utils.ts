@@ -5,8 +5,8 @@ export const isRoundComplete = (matchPlayers: MatchPlayer[], currentRound: numbe
   return activePlayers.every((player) => player.roundScores.length >= currentRound);
 };
 
-export const nextActivePlayer = (matchPlayers: MatchPlayer[], currentPlayer: Player): any => {
-  const currentPlayerIndex = matchPlayers.findIndex((player) => player.player.id === currentPlayer.id);
+export const nextActivePlayer = (matchPlayers: MatchPlayer[], currentPlayer: Player | null | undefined): any => {
+  const currentPlayerIndex = matchPlayers.findIndex((player) => player.player.id === currentPlayer?.id);
   const nextPlayerIndex = currentPlayerIndex + 1;
   const nextPlayer = matchPlayers[nextPlayerIndex] || matchPlayers[0];
   return nextPlayer;

@@ -15,19 +15,19 @@ const isGameComplete = (matchPlayers: MatchPlayer[], match: Match): boolean => {
 
 export const isOvertime = (matchPlayers: MatchPlayer[], currentRound: number, maxRounds: number): boolean => {
   const activePlayers = matchPlayers.filter((player) => player.isActive);
-  const maxScore = activePlayers.reduce((max, player) => Math.max(max, player.score), 0);
+  const maxScore = activePlayers.reduce((max, player) => Math.max(max, Number(player.score)), 0);
   const maxScorePlayers = activePlayers.filter((player) => player.score === maxScore);
 
   return isRoundComplete(activePlayers, currentRound) && currentRound >= maxRounds && maxScorePlayers.length > 1;
 };
 
 export const remainingOvertimePlayers = (matchPlayers: MatchPlayer[]): MatchPlayer[] => {
-  const maxScore = matchPlayers.reduce((max, player) => Math.max(max, player.score), 0);
+  const maxScore = matchPlayers.reduce((max, player) => Math.max(max, Number(player.score)), 0);
   return matchPlayers.filter((player) => player.score === maxScore);
 };
 
 const matchWinner = (matchPlayers: MatchPlayer[]): MatchPlayer | null => {
-  const maxScore = matchPlayers.reduce((max, player) => Math.max(max, player.score), 0);
+  const maxScore = matchPlayers.reduce((max, player) => Math.max(max, Number(player.score)), 0);
   return matchPlayers.find((player) => player.score === maxScore) || null;
 }
 
@@ -39,7 +39,7 @@ export const editScore = (match: Match, player: MatchPlayer, round: number, scor
       return {
         ...matchPlayer,
         roundScores: updatedRoundScores,
-        score: updatedRoundScores.reduce((total, roundScore) => total + roundScore, 0),
+        score: updatedRoundScores.reduce((total, roundScore) => Number(total) + Number(roundScore), 0),
       };
     }
     return matchPlayer;
@@ -71,12 +71,12 @@ export const updateScore = (match: Match, score: number): Match => {
 
   const updatedPlayer = {
     ...currentPlayer,
-    score: currentPlayer.score + score,
+    score: Number(currentPlayer.score) + score,
     roundScores: currentPlayer.roundScores.concat(score),
   };
 
   const updatedMatchPlayers = match.matchPlayers.map((player) => {
-    if (player.player.id === match.currentPlayer.id) {
+    if (player.player.id === match.currentPlayer?.id) {
       return updatedPlayer;
     }
     return player;

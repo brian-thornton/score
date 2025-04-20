@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
+
 import ScoreInput from "@/app/components/ScoreInput/ScoreInput";
-import { Match } from "@/app/lib/types";
+import { Match, TargetSet } from "@/app/lib/types";
 import styles from "./page.module.css";
 import MatchResult from "@/app/components/MatchResult/MatchResult";
 import GameHeader from "@/app/components/GameHeader/GameHeader";

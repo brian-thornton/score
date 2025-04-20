@@ -55,7 +55,7 @@ export const updateScore = (match: Match, score: string, possibleScores: string[
   };
 
   const updatedMatchPlayers = match.matchPlayers.map((player) => {
-    if (player.player.id === match.currentPlayer.id) {
+    if (player.player.id === match.currentPlayer?.id) {
       return updatedPlayer;
     }
     return player;

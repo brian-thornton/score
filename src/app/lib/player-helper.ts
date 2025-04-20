@@ -1,7 +1,7 @@
 import { Player } from './types';
 import { get, post } from './fetch-helper';
 
-const baseUrl = 'http://localhost:3000/api';
+const baseUrl = '/api';
 
 export const getPlayers = (): Promise<Player[]> => get(`${baseUrl}/players`);
 
@@ -10,8 +10,7 @@ export const createPlayer = async (player: [Player]): Promise<Player> => {
   const existingPlayer = players.find((p) => p.email === player[0].email);
 
   if (existingPlayer) {
-    reject('Player with this email already exists');
-    return;
+    throw new Error('Player with this email already exists');
   }
 
   players.push(player[0]);

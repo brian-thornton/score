@@ -1,7 +1,7 @@
 import { Team } from './types';
 import { get, post } from './fetch-helper';
 
-const baseUrl = 'http://localhost:3000/api';
+const baseUrl = '/api';
 
 export const getTeams = (): Promise<Team[]> => get(`${baseUrl}/teams`);
 

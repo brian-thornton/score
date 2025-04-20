@@ -8,11 +8,11 @@ export const createNewMatch = (players: Player[], targetNumber: number): Match =
 };
 
 const isGameComplete = (matchPlayers: MatchPlayer[], targetNumber: number): boolean => {
-  return matchPlayers.some((player) => player.score >= targetNumber);
+  return matchPlayers.some((player) => Number(player.score) >= targetNumber);
 };
 
 const matchWinner = (matchPlayers: MatchPlayer[], targetNumber: number): MatchPlayer | null => {
-  const maxScore = matchPlayers.reduce((max, player) => Math.max(max, player.score), 0);
+  const maxScore = matchPlayers.reduce((max, player) => Math.max(max, Number(player.score)), 0);
   return matchPlayers.find((player) => player.score === maxScore && player.score >= targetNumber) || null;
 }
 
@@ -24,7 +24,7 @@ export const editScore = (match: Match, player: MatchPlayer, round: number, scor
       return {
         ...matchPlayer,
         roundScores: updatedRoundScores,
-        score: updatedRoundScores.reduce((total, roundScore) => total + roundScore, 0),
+        score: updatedRoundScores.reduce((total, roundScore) => Number(total) + Number(roundScore), 0),
       };
     }
     return matchPlayer;
@@ -33,11 +33,11 @@ export const editScore = (match: Match, player: MatchPlayer, round: number, scor
   const updatedMatch = {
     ...match,
     matchPlayers: updatedMatchPlayers,
-    isComplete: isGameComplete(updatedMatchPlayers, match),
-    winner: isGameComplete(updatedMatchPlayers, match) ? matchWinner(updatedMatchPlayers) : null,
+    isComplete: isGameComplete(updatedMatchPlayers, match.targetNumber ?? 0),
+    winner: isGameComplete(updatedMatchPlayers, match.targetNumber ?? 0) ? matchWinner(updatedMatchPlayers, match.targetNumber ?? 0) : null,
   };
 
-  if (isGameComplete(updatedMatchPlayers, match)) {
+  if (isGameComplete(updatedMatchPlayers, match.targetNumber ?? 0)) {
     saveMatchToHistory(updatedMatch);
   }
 
@@ -45,7 +45,7 @@ export const editScore = (match: Match, player: MatchPlayer, round: number, scor
 };
 
 export const updateScore = (match: Match, score: number): Match => {
-  if (isGameComplete(match.matchPlayers, match.targetNumber)) {
+  if (isGameComplete(match.matchPlayers, match.targetNumber ?? 0)) {
     return match;
   }
 
@@ -56,12 +56,12 @@ export const updateScore = (match: Match, score: number): Match => {
 
   const updatedPlayer = {
     ...currentPlayer,
-    score: currentPlayer.score + score,
+    score: Number(currentPlayer.score) + score,
     roundScores: currentPlayer.roundScores.concat(score),
   };
 
   const updatedMatchPlayers = match.matchPlayers.map((player) => {
-    if (player.player.id === match.currentPlayer.id) {
+    if (player.player.id === match.currentPlayer?.id) {
       return updatedPlayer;
     }
     return player;
@@ -83,12 +83,12 @@ export const updateScore = (match: Match, score: number): Match => {
       phone: nextPlayer.player.phone
     },
     currentRound: nextRound,
-    isComplete: match.targetNumber !== undefined && isGameComplete(updatedMatchPlayers, match.targetNumber),
-    winner: isGameComplete(updatedMatchPlayers, match.targetNumber) ? matchWinner(updatedMatchPlayers, match.targetNumber) : null,
+    isComplete: match.targetNumber !== undefined && isGameComplete(updatedMatchPlayers, match.targetNumber ?? 0),
+    winner: isGameComplete(updatedMatchPlayers, match.targetNumber ?? 0) ? matchWinner(updatedMatchPlayers, match.targetNumber ?? 0) : null,
     maxRounds: match.maxRounds,
   };
 
-  if (isGameComplete(updatedMatchPlayers, match.targetNumber)) {
+  if (isGameComplete(updatedMatchPlayers, match.targetNumber ?? 0)) {
     saveMatchToHistory(updatedMatch);
   }
 

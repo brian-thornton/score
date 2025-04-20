@@ -1,11 +1,11 @@
 import { Match, MatchHistory } from './types';
 import { get, post } from './fetch-helper';
 
-const baseUrl = 'http://localhost:3000/api';
+const baseUrl = '/api';
 
 export const getMatchHistory = (): Promise<MatchHistory> => get(`${baseUrl}/match-history`);
 
-export const saveMatchToHistory = async (match: [Match]): Promise<Match> => {
+export const saveMatchToHistory = async (match: Match): Promise<Match> => {
     let matchHistory;
     try {
       matchHistory = await getMatchHistory();

@@ -45,7 +45,12 @@ const MatchTable = ({ match, displayEndRound, displayStartRound, onScoreClick }:
   const renderScoreCellsInDisplayRange = (player: MatchPlayer) => {
     if (displayStartRound && displayEndRound) {
       return player.roundScores.slice(displayStartRound - 1, displayEndRound).map((score, index) => (
-        <td className={cellStyle(player)} key={v4()} onClick={() => onScoreClick(player, index + 1)}>{score}</td>
+        <td
+          className={cellStyle(player)}
+          key={v4()}
+          onClick={() => onScoreClick ? onScoreClick(player, index + 1) : () => {}}>
+          {score}
+        </td>
       ));
     }
 

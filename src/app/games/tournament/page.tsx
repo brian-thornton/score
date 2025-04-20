@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import MatchTable from "@/app/components/MatchTable/MatchTable";
 import ScoreInput from "@/app/components/ScoreInput/ScoreInput";
-import { Match } from "@/app/lib/types";
+import { Player, Match } from "@/app/lib/types";
 import styles from "./page.module.css";
 import MatchResult from "@/app/components/MatchResult/MatchResult";
 import GameHeader from "@/app/components/GameHeader/GameHeader";
@@ -13,7 +13,7 @@ import ScoreEdit from "@/app/components/ScoreEdit/ScoreEdit";
 import { createNewMatch, updateScore, editScore } from "@/app/lib/singles-tournament-manager";
 
 const TournamentPage = () => {
-  const [players, setPlayers] = useState<string[][]>([[]]);
+  const [players, setPlayers] = useState<Player[]>([]);
   const [matchPlayers, setMatchPlayers] = useState<string[][]>([]);
   const [match, setMatch] = useState<Match>();
   const columns = ["Name", "email", "Phone"];

@@ -7,7 +7,7 @@ export type Player = {
 
 export type MatchPlayer = {
   player: Player,
-  score: number,
+  score: number | string,
   roundScores: (string | number)[],
   isActive: boolean,
 };
@@ -27,7 +27,7 @@ export enum MatchType {
 export type Match = {
   id: string,
   matchPlayers: MatchPlayer[], 
-  currentPlayer: Player,
+  currentPlayer: Player | null | undefined, 
   currentRound: number,
   matchType: string,
   maxRounds: number,

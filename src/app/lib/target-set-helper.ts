@@ -1,6 +1,6 @@
 import { Player } from './types';
 
-const baseUrl = 'http://localhost:3000/api';
+const baseUrl = '/api';
 
 export const getTargetSets = (): Promise<Player[]> => {
   return new Promise((resolve, reject) => {

@@ -51,8 +51,8 @@ const TargetList = ({ onTargetsChange }: TargetListProps) => {
         placeholder="Add target"
         onKeyDown={(e) => {
           if (e.key === "Enter") {
-            addTarget(e.target.value);
-            e.target.value = "";
+            addTarget((e.target as HTMLInputElement).value);
+            (e.target as HTMLInputElement).value = "";
           }
         }}
       />
