@@ -14,12 +14,12 @@ import { createNewMatch, updateScore, editScore } from "@/app/lib/singles-tourna
 
 const TournamentPage = () => {
   const [players, setPlayers] = useState<Player[]>([]);
-  const [matchPlayers, setMatchPlayers] = useState<string[][]>([]);
+  const [matchPlayers, setMatchPlayers] = useState<any>([]);
   const [match, setMatch] = useState<Match>();
   const columns = ["Name", "email", "Phone"];
   const displayPlayers = players.map((player) => [player.name, player.email, player.phone]);
   const [editRound, setEditRound] = useState<number>(0);
-  const [editPlayer, setEditPlayer] = useState();
+  const [editPlayer, setEditPlayer] = useState<any>();
 
   const loadPlayers = async () => {
     const data = await getPlayers();
@@ -30,15 +30,15 @@ const TournamentPage = () => {
     loadPlayers();
   }, []);
 
-  const onScoreChange = (match: Match, score: number) => {
-    const updatedMatch = updateScore(match, score);
+  const onScoreChange = (match: Match, score: string | number, possibleScores: string[] | undefined) => {
+    const numericScore = typeof score === "string" ? parseInt(score, 10) : score;
+    const updatedMatch = updateScore(match, numericScore);
     setMatch(updatedMatch);
   }
 
   const onMatchPlayerAdd = async (rowObject: any) => {
     const player = players.find((player) => player.email === rowObject[1]);
     setMatchPlayers([...matchPlayers, player]);
-    console.log(player);
   }
 
   const endMatch = () => {
@@ -60,15 +60,17 @@ const TournamentPage = () => {
         <GameHeader title="Edit Score" />
         <ScoreEdit
           onSave={(score) => {
-            const updatedMatch = editScore(match, editPlayer, editRound, score);
-            setMatch(updatedMatch);
-            setEditPlayer(undefined);
+            if (match) {
+              const updatedMatch = editScore(match, editPlayer, editRound, score);
+              setMatch(updatedMatch);
+              setEditPlayer(undefined);
+            }
           }}
           onCancel={() => setEditPlayer(undefined)}
           currentScore={editPlayer.roundScores[editRound - 1]}
           round={`Round ${editRound}`}
           playerName={editPlayer.player.name}
-          possibleScores={[0, 1, 2, 3, 4, 5, 6]}
+          possibleScores={["0", "1", "2", "3", "4", "5", "6"]}
         />
       </div>
     );

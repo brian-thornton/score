@@ -35,7 +35,7 @@ const TeamsPage = () => {
   };
 
   const onEditClick = (index: Number) => {
-    window.location.replace(`/teams/${teams[index].id}`);
+    window.location.replace(`/player-admin/teams/${teams[index].id}`);
   };
 
   return (

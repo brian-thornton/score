@@ -1,11 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
-import Table from "../../components/Table/Table";
-import { updateTeam, getTeams } from "../../lib/api-clients/teams-helper";
+import Table from "../../../components/Table/Table";
+import { updateTeam, getTeams } from "../../../lib/api-clients/teams-helper";
 import { useParams } from "next/navigation";
 import { getPlayers } from "@/app/lib/api-clients/player-helper";
 import styles from "./page.module.css";
-import { Player, Team } from "../../lib/types";
+import { Player, Team } from "../../../lib/types";
 
 const TeamPage = () => {
   const params = useParams();
