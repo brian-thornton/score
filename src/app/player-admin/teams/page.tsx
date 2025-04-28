@@ -8,7 +8,7 @@ import styles from "./page.module.css";
 const TeamsPage = () => {
   const columns = ["Name"];
   const [teams, setTeams] = useState<Team[]>([]);
-  const [teamRows, setTeamRows] = useState<[string[]]>([[]]);
+  const [teamRows, setTeamRows] = useState<any>([[]]);
 
   const loadTeams = async () => {
     const data = await getTeams();
@@ -30,11 +30,11 @@ const TeamsPage = () => {
 
   const onSaveTeams = async (newTeam: any) => {
     await createTeam([newTeam]);
-    setTeams([...teams, [newTeam.name]]);
+    setTeams([...teams, newTeam]);
     await loadTeams();
   };
 
-  const onEditClick = (index: Number) => {
+  const onEditClick = (index: number) => {
     window.location.replace(`/player-admin/teams/${teams[index].id}`);
   };
 

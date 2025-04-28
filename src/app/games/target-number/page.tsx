@@ -1,26 +1,26 @@
 "use client";
 import { useEffect, useState } from "react";
+
 import MatchTable from "@/app/components/MatchTable/MatchTable";
 import ScoreInput from "@/app/components/ScoreInput/ScoreInput";
-import { Match } from "@/app/lib/types";
+import { Match, MatchPlayer, Player } from "@/app/lib/types";
 import styles from "./page.module.css";
 import MatchResult from "@/app/components/MatchResult/MatchResult";
 import GameHeader from "@/app/components/GameHeader/GameHeader";
 import { getPlayers } from "@/app/lib/api-clients/player-helper";
 import Table from "@/app/components/Table/Table";
 import ScoreEdit from "@/app/components/ScoreEdit/ScoreEdit";
-
 import { createNewMatch, updateScore, editScore } from "@/app/lib/target-number-manager";
 
 const TargetNumberPage = () => {
-  const [players, setPlayers] = useState<string[][]>([[]]);
-  const [matchPlayers, setMatchPlayers] = useState<string[][]>([]);
+  const [players, setPlayers] = useState<Player[]>([]);
+  const [matchPlayers, setMatchPlayers] = useState<any>([]);
   const [match, setMatch] = useState<Match>();
   const [targetNumber, setTargetNumber] = useState<number>(21);
   const columns = ["Name", "email", "Phone"];
   const displayPlayers = players.map((player) => [player.name, player.email, player.phone]);
   const [editRound, setEditRound] = useState<number>(0);
-  const [editPlayer, setEditPlayer] = useState();
+  const [editPlayer, setEditPlayer] = useState<MatchPlayer | undefined>();
 
   const loadPlayers = async () => {
     const data = await getPlayers();
@@ -36,8 +36,9 @@ const TargetNumberPage = () => {
     setMatchPlayers([...matchPlayers, player]);
   }
 
-  const onScoreChange = (match: Match, score: number) => {
-    const updatedMatch = updateScore(match, score);
+  const onScoreChange = (match: Match, score: string | number, possibleScores: string[] | undefined) => {
+    const numericScore = typeof score === "string" ? parseInt(score) : score;
+    const updatedMatch = updateScore(match, numericScore);
     setMatch(updatedMatch);
   }
 
@@ -51,10 +52,11 @@ const TargetNumberPage = () => {
   };
 
   const minRoundOrZero = () => {
-    if (match.currentRound - 10 < 0) {
+    if (match && match.currentRound - 10 < 0) {
       return 1;
     }
-    return match.currentRound - 9;
+
+    return match ? match.currentRound - 9 : 0;
   }
 
   const endMatch = () => {
@@ -65,18 +67,20 @@ const TargetNumberPage = () => {
     return (
       <div className={styles.container}>
         <GameHeader title="Edit Score" />
-        <ScoreEdit
-          onSave={(score) => {
-            const updatedMatch = editScore(match, editPlayer, editRound, score);
-            setMatch(updatedMatch);
-            setEditPlayer(undefined);
-          }}
-          onCancel={() => setEditPlayer(undefined)}
-          currentScore={editPlayer.roundScores[editRound - 1]}
-          round={`Round ${editRound}`}
-          playerName={editPlayer.player.name}
-          possibleScores={[0, 1, 2, 3, 4, 5, 6]}
-        />
+        {match && (
+          <ScoreEdit
+            onSave={(score) => {
+              const updatedMatch = editScore(match, editPlayer, editRound, score);
+              setMatch(updatedMatch);
+              setEditPlayer(undefined);
+            }}
+            onCancel={() => setEditPlayer(undefined)}
+            currentScore={Number(editPlayer.roundScores[editRound - 1])}
+            round={`Round ${editRound}`}
+            playerName={editPlayer.player.name}
+            possibleScores={["0", "1", "2", "3", "4", "5", "6"]}
+          />
+        )}
       </div>
     );
   };
@@ -84,7 +88,11 @@ const TargetNumberPage = () => {
   return match ? (
     <div className={styles.container}>
       <GameHeader title={`Target Number - First to ${match.targetNumber}`} />
-      <MatchTable onScoreClick={onScoreClick} match={match} displayEndRound={minRoundOrZero() + 10} displayStartRound={minRoundOrZero()} />
+      <MatchTable
+        onScoreClick={onScoreClick}
+        match={match} displayEndRound={minRoundOrZero() + 10}
+        displayStartRound={minRoundOrZero()}
+      />
       {!match.isComplete && (
         <>
           <ScoreInput possibleScores={[0, 1, 2, 3, 4, 5, 6]} onChange={onScoreChange} match={match} />

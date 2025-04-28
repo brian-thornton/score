@@ -17,7 +17,7 @@ const matchWinner = (matchPlayers: MatchPlayer[], targetNumber: number): MatchPl
 }
 
 export const editScore = (match: Match, player: MatchPlayer, round: number, score: number): Match => {
-  const updatedMatchPlayers = match.matchPlayers.map((matchPlayer) => {
+  const updatedMatchPlayers = match?.matchPlayers.map((matchPlayer) => {
     if (matchPlayer.player.id === player.player.id) {
       const updatedRoundScores = [...matchPlayer.roundScores];
       updatedRoundScores[round - 1] = score;
@@ -33,8 +33,8 @@ export const editScore = (match: Match, player: MatchPlayer, round: number, scor
   const updatedMatch = {
     ...match,
     matchPlayers: updatedMatchPlayers,
-    isComplete: isGameComplete(updatedMatchPlayers, match.targetNumber ?? 0),
-    winner: isGameComplete(updatedMatchPlayers, match.targetNumber ?? 0) ? matchWinner(updatedMatchPlayers, match.targetNumber ?? 0) : null,
+    isComplete: isGameComplete(updatedMatchPlayers, match?.targetNumber ?? 0),
+    winner: isGameComplete(updatedMatchPlayers, match?.targetNumber ?? 0) ? matchWinner(updatedMatchPlayers, match?.targetNumber ?? 0) : null,
   };
 
   if (isGameComplete(updatedMatchPlayers, match.targetNumber ?? 0)) {

@@ -14,11 +14,11 @@ import { createTargetSet } from "@/app/lib/api-clients/target-set-helper";
 import { createNewMatch, updateScore } from "@/app/lib/goal-match-manager";
 
 const TargetGoalPage = () => {
-  const [players, setPlayers] = useState<string[][]>([[]]);
-  const [matchPlayers, setMatchPlayers] = useState<string[][]>([]);
+  const [players, setPlayers] = useState<any>([[]]);
+  const [matchPlayers, setMatchPlayers] = useState<any>([]);
   const [match, setMatch] = useState<Match>();
   const columns = ["Name", "email", "Phone"];
-  const displayPlayers = players.map((player) => [player.name, player.email, player.phone]);
+  const displayPlayers = players.map((player: any) => [player.name, player.email, player.phone]);
   const [possibleScores, setPossibleScores] = useState<string[]>([]);
 
   const loadPlayers = async () => {
@@ -31,7 +31,7 @@ const TargetGoalPage = () => {
   }, []);
 
   const onMatchPlayerAdd = async (rowObject: any) => {
-    const player = players.find((player) => player.email === rowObject[1]);
+    const player = players.find((player: any) => player.email === rowObject[1]);
     setMatchPlayers([...matchPlayers, player]);
   }
 
@@ -43,13 +43,12 @@ const TargetGoalPage = () => {
     window.location.reload();
   }
 
-  const onScoreChange = (match: Match, score: string, possibleScores: string[]) => {
-    console.log(possibleScores);
-    const updatedMatch = updateScore(match, score, possibleScores);
+  const onScoreChange = (match: Match, score: string | number, possibleScores: string[] | undefined) => {
+    const updatedMatch = updateScore(match, String(score), possibleScores || []);
     setMatch(updatedMatch);
   };
 
-  const onTargetListChange = (targetSet) => {
+  const onTargetListChange = (targetSet: any) => {
     setPossibleScores(targetSet.targets);
     createTargetSet(targetSet);
   }

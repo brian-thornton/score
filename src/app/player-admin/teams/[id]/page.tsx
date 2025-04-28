@@ -34,7 +34,7 @@ const TeamPage = () => {
 
     await updateTeam({
       ...team,
-      players: team?.players ? [...team.players, addedPlayer] : [addedPlayer],
+      players: addedPlayer ? (team?.players ? [...team.players, addedPlayer] : [addedPlayer]) : team?.players,
     });
 
     await loadData();
