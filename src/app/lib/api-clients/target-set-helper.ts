@@ -1,8 +1,8 @@
-import { Player } from './types';
+import { TargetSet } from '../types';
 
 const baseUrl = '/api';
 
-export const getTargetSets = (): Promise<Player[]> => {
+export const getTargetSets = (): Promise<TargetSet[]> => {
   return new Promise((resolve, reject) => {
     const url = `${baseUrl}/target-sets`;
     fetch(url)
@@ -16,7 +16,7 @@ export const getTargetSets = (): Promise<Player[]> => {
   });
 };
 
-export const createTargetSet = async (targetSet: string[]): Promise<Player> => {
+export const createTargetSet = async (targetSet: TargetSet): Promise<TargetSet> => {
   return new Promise(async (resolve, reject) => {
     let targetSets = await getTargetSets();
 

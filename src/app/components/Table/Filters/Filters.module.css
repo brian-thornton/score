@@ -8,7 +8,7 @@
   width: 100%;
 }
 
-input:focus {
+.input:focus {
   border-color: darkgray;
   outline: darkgray;
 }
