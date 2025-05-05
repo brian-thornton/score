@@ -1,8 +1,8 @@
 .container {
-  background-color: #292929;
+  background-color: var(--background);
   height: 100vh;
 }
 
 .header {
-  color: #FFFFFF;
+  color: var(--text-color);
 }

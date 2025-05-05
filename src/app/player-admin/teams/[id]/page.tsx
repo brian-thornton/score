@@ -65,14 +65,6 @@ const TeamPage = () => {
     <div className={styles.container}>
       <Table
         columns={columns}
-        data={teamPlayers}
-        deleteEnabled
-        emptyText="No players have been added to the team."
-        onDeleteClick={onRemoveFromTeam}
-        tableHeading={`Team ${team?.name} Players`}
-      />
-      <Table
-        columns={columns}
         data={playerRows}
         editable
         emptyText="All players have been assigned to the team."
@@ -81,6 +73,14 @@ const TeamPage = () => {
         selectable
         tableHeading={`Available Players`}
         deleteEnabled={false}
+      />
+      <Table
+        columns={columns}
+        data={teamPlayers}
+        deleteEnabled
+        emptyText="No players have been added to the team."
+        onDeleteClick={onRemoveFromTeam}
+        tableHeading={`Team ${team?.name} Players`}
       />
     </div>
   );

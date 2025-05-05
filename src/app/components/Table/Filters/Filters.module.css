@@ -2,7 +2,7 @@
   background-color: #333;
   border-radius: 5px;
   border: 1px solid darkgray;
-  color: #FFFFFF;
+  color: var(--text-color);
   height: 30px;
   padding: 5px;
   width: 100%;

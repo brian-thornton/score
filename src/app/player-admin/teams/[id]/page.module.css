@@ -1,11 +1,13 @@
 .container {
-  background-color: #292929;
+  background-color: var(--background);
   height: 100vh;
   padding: 10px;
+  display: flex;
+  flex-direction: row;
 }
 
 .header {
-   color: #FFFFFF;
+   color: var(--text-color);
    font-size: 20px;
    margin-left: 5px;
 }

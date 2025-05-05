@@ -1,6 +1,6 @@
 .container {
   margin: 0 auto;
-  background-color: #292929;
+  background-color: var(--background);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,7 +8,7 @@
 }
 
 .header {
-  color: #FFFFFF;
+  color: var(--text-color);
   font-size: 2rem;
   margin-top: 20px;
 }
@@ -24,7 +24,7 @@
   background-color: #333;
   border-radius: 5px;
   border: 1px solid darkgray;
-  color: #FFFFFF;
+  color: var(--text-color);
   height: 50px;
   padding: 5px;
   width: 25%;
@@ -45,7 +45,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: white;
+  color: var(--text-color);
   height: 50px;
   padding-left: 10px;
   border : 1px solid darkgray;
@@ -55,7 +55,7 @@
 .removeButton {
   background-color: #333;
   border: none;
-  color: white;
+  color: var(--text-color);
   padding: 10px;
   text-align: center;
   text-decoration: none;

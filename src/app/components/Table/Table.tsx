@@ -53,7 +53,7 @@ const Table = ({
   }, [data]);
 
   return (
-    <>
+    <div className={styles.innerContainer}>
       {tableHeading && <div className={styles.tableHeading}>{tableHeading}</div>}
       <div className={styles.tableContainer}>
         {enableFilter && rows.length > 0 && <Filters columns={columns} onFilterChange={onFilterChange} />}
@@ -95,7 +95,7 @@ const Table = ({
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

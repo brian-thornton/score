@@ -1,5 +1,5 @@
 .container {
-  background-color: #292929;
+  background-color: var(--background);
   padding: 10px;
   display: flex;
   flex-direction: row;
@@ -9,7 +9,7 @@
 .scoreButton {
   background-color: #333;
   border: none;
-  color: white;
+  color: var(--text-color);
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -21,5 +21,5 @@
 }
 
 .scoreButton:hover {
-  background-color: #4b4b4b;
+  background-color: var(--hover);
 }

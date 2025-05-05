@@ -1,11 +1,11 @@
 .container {
-  background-color: #292929;
+  background-color: var(--background);
   padding: 10px;
   text-align: center;
 }
 
 .result {
-  color: #FFFFFF;
+  color: var(--text-color);
   font-size: 20px;
   margin-left: 5px;
 }
