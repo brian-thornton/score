@@ -1,6 +1,7 @@
 import styles from './MatchTable.module.css';
 import { MatchPlayer, Match } from '@/app/lib/types';
 import { v4 } from 'uuid';
+import { useEffect, useState } from 'react';
 
 type MatchTableProps = {
   match: Match;
@@ -9,7 +10,28 @@ type MatchTableProps = {
   onScoreClick?: (player: MatchPlayer, round: number) => void;
 }
 
+type ViewportSize = 'desktop' | 'tablet' | 'mobile';
+
 const MatchTable = ({ match, displayEndRound, displayStartRound, onScoreClick }: MatchTableProps) => {
+  const [viewportSize, setViewportSize] = useState<ViewportSize>('desktop');
+
+  useEffect(() => {
+    const checkViewport = () => {
+      const width = window.innerWidth;
+      if (width <= 768) {
+        setViewportSize('mobile');
+      } else if (width <= 1024) {
+        setViewportSize('tablet');
+      } else {
+        setViewportSize('desktop');
+      }
+    };
+
+    checkViewport();
+    window.addEventListener('resize', checkViewport);
+    return () => window.removeEventListener('resize', checkViewport);
+  }, []);
+
   const cellStyle = (player: MatchPlayer) => {
     if (match.winner && player.player.id === match.winner.player.id) {
       return styles.winnerCell;
@@ -22,57 +44,52 @@ const MatchTable = ({ match, displayEndRound, displayStartRound, onScoreClick }:
     return styles.scoreCell;
   }
 
-  const fillEmptyCells = (player: MatchPlayer) => {
-    const emptyCells = Array.from({ length: match.maxRounds - player.roundScores.length }, (_, i) => i);
+  const getVisibleRounds = () => {
+    if (viewportSize === 'desktop') {
+      return {
+        start: displayStartRound || 1,
+        end: displayEndRound || match.maxRounds
+      };
+    }
 
-    return emptyCells.map((_, index) => (
-      <td className={cellStyle(player)} key={v4()}></td>
-    ));
+    const currentRound = match.currentRound;
+    const range = viewportSize === 'mobile' ? 1 : 2; // 1 for mobile (3 columns), 2 for tablet (5 columns)
+
+    return {
+      start: Math.max(1, currentRound - range),
+      end: Math.min(match.maxRounds, currentRound + range)
+    };
   };
 
   const renderHeaderDisplayRange = () => {
-    if (displayStartRound && displayEndRound) {
-      return Array.from({ length: displayEndRound - displayStartRound + 1 }, (_, i) => i).map((_, index) => (
-        <th className={match.currentRound === (index + displayStartRound) ? styles.activeRoundHeader : styles.th} key={v4()}>Round {index + displayStartRound}</th>
-      ));
-    }
+    const { start, end } = getVisibleRounds();
+    const rounds = Array.from({ length: end - start + 1 }, (_, i) => i + start);
 
-    return Array.from({ length: match.maxRounds }, (_, i) => i).map((_, index) => (
-      <th className={match.currentRound === (index + 1) ? styles.activeRoundHeader : styles.th} key={v4()}>Round {index + 1}</th>
+    return rounds.map((round) => (
+      <th 
+        className={match.currentRound === round ? styles.activeRoundHeader : styles.th}
+        key={v4()}
+      >
+        Round {round}
+      </th>
     ));
   };
 
   const renderScoreCellsInDisplayRange = (player: MatchPlayer) => {
-    if (displayStartRound && displayEndRound) {
-      return player.roundScores.slice(displayStartRound - 1, displayEndRound).map((score, index) => (
+    const { start, end } = getVisibleRounds();
+    const rounds = Array.from({ length: end - start + 1 }, (_, i) => i + start);
+
+    return rounds.map((round) => {
+      const score = player.roundScores[round - 1];
+      return (
         <td
           className={cellStyle(player)}
           key={v4()}
-          onClick={() => onScoreClick ? onScoreClick(player, index + 1) : () => {}}>
+          onClick={() => onScoreClick ? onScoreClick(player, round) : () => {}}>
           {score}
         </td>
-      ));
-    }
-
-    return player.roundScores.map((score, index) => (
-      <td
-        onClick={() => onScoreClick ? onScoreClick(player, index + 1) : () => { }}
-        className={cellStyle(player)} key={v4()}>
-        {score}
-      </td>
-    ));
-  }
-
-  const fillEmptyCellsToDisplayEndRound = (player: MatchPlayer) => {
-    if (displayStartRound && displayEndRound) {
-      const emptyCells = Array.from({ length: displayEndRound - player.roundScores.length }, (_, i) => i);
-
-      return emptyCells.map((_, index) => (
-        <td className={cellStyle(player)} key={v4()}></td>
-      ));
-    }
-
-    return null;
+      );
+    });
   };
 
   return (
@@ -90,8 +107,6 @@ const MatchTable = ({ match, displayEndRound, displayStartRound, onScoreClick }:
             <tr className={cellStyle(player)} key={v4()}>
               <td className={styles.td} key={v4()}>{player.player.name}</td>
               {renderScoreCellsInDisplayRange(player)}
-              {!displayStartRound && fillEmptyCells(player)}
-              {displayStartRound && fillEmptyCellsToDisplayEndRound(player)}
               <td className={styles.td} key={v4()}>{player.roundScores.reduce((a, b) => Number(a) + Number(b), 0)}</td>
             </tr>
           ))}

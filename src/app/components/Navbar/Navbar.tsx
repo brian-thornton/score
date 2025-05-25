@@ -1,33 +1,60 @@
+"use client";
 import React from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import styles from './Navbar.module.css';
 
+interface NavLink {
+  href: string;
+  label: string;
+}
+
+const navLinks: NavLink[] = [
+  { href: '/player-admin/players', label: 'Players' },
+  { href: '/player-admin/teams', label: 'Teams' },
+  { href: '/games/tournament', label: 'Tournament' },
+  { href: '/games/target-number', label: 'Target Number' },
+  { href: '/games/target-goal', label: 'Targets' },
+  { href: '/match-history', label: 'Match History' },
+];
+
 const Navbar = () => {
+  const pathname = usePathname();
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <nav className={styles.navbar}>
       <div className={styles.navbarLeft}>
-        <a href="/" className={styles.logo}>
+        <Link href="/" className={styles.logo}>
           Score
-        </a>
+        </Link>
       </div>
-      <div className={styles.navbarRight}>
-        <a href="/player-admin/players" className={styles.navbarLink}>
-          Players
-        </a>
-        <a href="/player-admin/teams" className={styles.navbarLink}>
-          Teams
-        </a>
-        <a href="/games/tournament" className={styles.navbarLink}>
-          Tournament
-        </a>
-        <a href="/games/target-number" className={styles.navbarLink}>
-          Target Number
-        </a>
-        <a href="/games/target-goal" className={styles.navbarLink}>
-          Targets
-        </a>
-        <a href="/match-history" className={styles.navbarLink}>
-          Match History
-        </a>
+      <div className={`${styles.navbarRight} ${isMenuOpen ? styles.menuOpen : ''}`}>
+        {navLinks.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            className={`${styles.navbarLink} ${
+              pathname === link.href ? styles.active : ''
+            }`}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            {link.label}
+          </Link>
+        ))}
+        <button 
+          className={`${styles.hamburger} ${isMenuOpen ? styles.active : ''}`}
+          onClick={toggleMenu}
+          aria-label="Toggle menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </nav>
   );

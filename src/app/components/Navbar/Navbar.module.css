@@ -1,21 +1,42 @@
 .navbar {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  background-color: #333;
-  color: #fff;
+  align-items: center;
+  background-color: var(--table-background);
+  color: var(--text-color);
   padding: 1rem;
   border-bottom: 2px solid #4b4b4b;
+  position: relative;
+}
+
+.navbarLeft {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .navbarLink {
-  margin-left: 10px;
+  margin-left: 1rem;
+  color: var(--text-color);
+  text-decoration: none;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.navbarLink:hover {
+  background-color: var(--hover);
+}
+
+.navbarLink.active {
+  background-color: var(--active);
+  color: var(--text-color);
 }
 
 .navbarLeft .logo {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #fff;
+  color: var(--text-color);
   text-decoration: none;
 }
 
@@ -37,6 +58,76 @@
 
 .navbarRight {
   display: flex;
-  align-items: flex-end;
-  width: 30vw;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 10;
+}
+
+.hamburger span {
+  width: 100%;
+  height: 3px;
+  background-color: var(--text-color);
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.hamburger.active span:first-child {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:last-child {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+    margin-left: 1rem;
+  }
+
+  .navbarRight {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: 250px;
+    background-color: var(--table-background);
+    flex-direction: column;
+    padding: 80px 20px 20px;
+    transition: right 0.3s ease;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .navbarRight.menuOpen {
+    right: 0;
+  }
+
+  .navbarLink {
+    margin: 0.5rem 0;
+    width: 100%;
+    text-align: left;
+  }
+
+  .hamburger {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+  }
 }

@@ -1,11 +1,30 @@
 .container {
   margin: 0 auto;
   background-color: #4b4b4b;
+  overflow-x: auto;
 }
 
 .table {
   table-layout: fixed;
   width: 100%;
+}
+
+.table th:first-child,
+.table td:first-child {
+  width: 200px;
+  min-width: 200px;
+}
+
+.table th:not(:first-child):not(:last-child),
+.table td:not(:first-child):not(:last-child) {
+  width: 100px;
+  min-width: 100px;
+}
+
+.table th:last-child,
+.table td:last-child {
+  width: 100px;
+  min-width: 100px;
 }
 
 .tr {
@@ -87,4 +106,24 @@
   font-weight: 600;
   padding: 1rem;
   text-align: center;
+}
+
+@media (max-width: 1024px) {
+  .table {
+    min-width: 100%;
+  }
+
+  .hiddenOnTablet {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .table {
+    min-width: 100%;
+  }
+
+  .hiddenOnMobile {
+    display: none;
+  }
 }

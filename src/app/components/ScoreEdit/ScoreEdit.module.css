@@ -32,10 +32,17 @@
   margin: 4px 2px;
   cursor: pointer;
   height: 10vh;
+  transition: all 0.2s ease-in-out;
 }
 
 .scoreButton:hover {
   background-color: var(--hover);
+}
+
+.scoreButton.selected {
+  background-color: var(--hover);
+  border: 2px solid var(--text-color);
+  transform: scale(1.05);
 }
 
 .controlButton {
