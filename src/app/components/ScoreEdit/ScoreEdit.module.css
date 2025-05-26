@@ -1,61 +1,241 @@
 .container {
-  background-color: var(--background);
-  padding: 10px;
+  background-color: var(--primary-color);
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 1.5rem;
 }
 
 .buttonRow {
   display: flex;
   justify-content: center;
   flex-direction: row;
-  margin-bottom: 10px;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .header {
   color: var(--text-color);
-  font-size: 30px;
+  font-size: 1.5rem;
+  font-weight: 600;
   text-align: center;
-  margin-bottom: 20px;
 }
 
 .scoreButton {
-  background-color: #333;
-  border: none;
+  padding: 1.25rem 2rem;
+  background-color: var(--secondary-color);
   color: var(--text-color);
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 30px;
-  margin: 4px 2px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.5rem;
+  font-weight: 600;
   cursor: pointer;
-  height: 10vh;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease;
+  min-width: 120px;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .scoreButton:hover {
-  background-color: var(--hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.scoreButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Theme-specific base colors */
+:root[data-theme="light"] .scoreButton {
+  background-color: #f0f0f0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+:root[data-theme="dark"] .scoreButton {
+  background-color: #2a2a2a;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+:root[data-theme="blue"] .scoreButton {
+  background-color: #e67e22;
+  box-shadow: 0 2px 4px rgba(230, 126, 34, 0.2);
+}
+
+:root[data-theme="green"] .scoreButton {
+  background-color: #e63946;
+  box-shadow: 0 2px 4px rgba(230, 57, 70, 0.2);
+}
+
+:root[data-theme="purple"] .scoreButton {
+  background-color: #ffd700;
+  box-shadow: 0 2px 4px rgba(255, 215, 0, 0.2);
+}
+
+:root[data-theme="teal"] .scoreButton {
+  background-color: #ff6b6b;
+  box-shadow: 0 2px 4px rgba(255, 107, 107, 0.2);
+}
+
+:root[data-theme="ocean"] .scoreButton {
+  background-color: #7f96aa;
+  box-shadow: 0 2px 4px rgba(127, 150, 170, 0.2);
+}
+
+:root[data-theme="azure"] .scoreButton {
+  background-color: #63b3ed;
+  box-shadow: 0 2px 4px rgba(99, 179, 237, 0.2);
+}
+
+:root[data-theme="deepblue"] .scoreButton {
+  background-color: #2478b7;
+  box-shadow: 0 2px 4px rgba(32, 107, 163, 0.2);
+}
+
+:root[data-theme="forest"] .scoreButton {
+  background-color: #40916c;
+  box-shadow: 0 2px 4px rgba(64, 145, 108, 0.2);
+}
+
+:root[data-theme="matrix"] .scoreButton {
+  background-color: #003300;
+  box-shadow: 0 2px 4px rgba(0, 255, 0, 0.2);
+  border: 1px solid #00ff00;
+}
+
+/* Theme-specific hover colors */
+:root[data-theme="light"] .scoreButton:hover {
+  background-color: #e5e5e5;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+:root[data-theme="dark"] .scoreButton:hover {
+  background-color: #2a2a2a;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+:root[data-theme="blue"] .scoreButton:hover {
+  background-color: #e67e22;
+  box-shadow: 0 4px 6px rgba(230, 126, 34, 0.2);
+}
+
+:root[data-theme="green"] .scoreButton:hover {
+  background-color: #e63946;
+  box-shadow: 0 4px 6px rgba(230, 57, 70, 0.2);
+}
+
+:root[data-theme="purple"] .scoreButton:hover {
+  background-color: #ffd700;
+  box-shadow: 0 4px 6px rgba(255, 215, 0, 0.2);
+}
+
+:root[data-theme="teal"] .scoreButton:hover {
+  background-color: #ff6b6b;
+  box-shadow: 0 4px 6px rgba(255, 107, 107, 0.2);
+}
+
+:root[data-theme="ocean"] .scoreButton:hover {
+  background-color: #7f96aa;
+  box-shadow: 0 4px 6px rgba(127, 150, 170, 0.2);
+}
+
+:root[data-theme="azure"] .scoreButton:hover {
+  background-color: #63b3ed;
+  box-shadow: 0 4px 6px rgba(99, 179, 237, 0.2);
+}
+
+:root[data-theme="deepblue"] .scoreButton:hover {
+  background-color: #2986cc;
+  box-shadow: 0 4px 6px rgba(32, 107, 163, 0.2);
+}
+
+:root[data-theme="forest"] .scoreButton:hover {
+  background-color: #52b788;
+  box-shadow: 0 4px 6px rgba(64, 145, 108, 0.2);
+}
+
+:root[data-theme="matrix"] .scoreButton:hover {
+  background-color: #006600;
+  box-shadow: 0 4px 6px rgba(0, 255, 0, 0.3);
+  text-shadow: 0 0 5px #00ff00;
 }
 
 .scoreButton.selected {
-  background-color: var(--hover);
-  border: 2px solid var(--text-color);
+  background-color: var(--active);
+  color: white;
   transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(var(--active-rgb), 0.2);
 }
 
 .controlButton {
-  background-color: #333;
+  padding: 1rem 1.5rem;
+  background-color: var(--active);
+  color: white;
   border: none;
-  color: var(--text-color);
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 30px;
-  margin: 4px 2px;
+  border-radius: 8px;
+  font-size: 1.25rem;
+  font-weight: 600;
   cursor: pointer;
-  height: 10vh;
-  width: 30vh;
+  transition: all 0.2s ease;
+  min-width: 150px;
+  min-height: 60px;
+  box-shadow: 0 2px 4px rgba(var(--active-rgb), 0.2);
+}
+
+.controlButton:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(var(--active-rgb), 0.3);
+}
+
+.controlButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(var(--active-rgb), 0.2);
+}
+
+@media (max-width: 1024px) {
+  .scoreButton {
+    padding: 1rem 1.5rem;
+    font-size: 1.25rem;
+    min-width: 100px;
+    min-height: 70px;
+  }
+  
+  .controlButton {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.125rem;
+    min-width: 120px;
+    min-height: 50px;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .buttonRow {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+  
+  .scoreButton {
+    flex: 1 1 calc(33.333% - 0.5rem);
+    min-width: 0;
+    padding: 0.75rem;
+    font-size: 1.25rem;
+    min-height: 60px;
+  }
+
+  .controlButton {
+    flex: 1 1 100%;
+    min-width: 0;
+    padding: 0.75rem;
+    font-size: 1.125rem;
+    min-height: 50px;
+  }
 }

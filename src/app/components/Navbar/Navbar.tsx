@@ -16,6 +16,7 @@ const navLinks: NavLink[] = [
   { href: '/games/target-number', label: 'Target Number' },
   { href: '/games/target-goal', label: 'Targets' },
   { href: '/match-history', label: 'Match History' },
+  { href: '/settings', label: 'Settings' },
 ];
 
 const Navbar = () => {

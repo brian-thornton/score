@@ -14,10 +14,46 @@
 }
 
 .targetList {
-  margin-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.target {
+  background-color: var(--secondary-color);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.target:hover {
+  transform: translateY(-2px);
+}
+
+.targetNumber {
+  color: var(--text-color);
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.targetScore {
+  color: var(--text-color);
+  font-size: 1.25rem;
+  text-align: center;
+  opacity: 0.8;
+}
+
+.target.selected {
+  background-color: var(--active);
+}
+
+.target.selected .targetNumber,
+.target.selected .targetScore {
+  color: white;
 }
 
 .input {
@@ -64,4 +100,10 @@
   margin-left: 20px;
   cursor: pointer;
   height: 5vh;
+}
+
+@media (max-width: 640px) {
+  .targetList {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
 }

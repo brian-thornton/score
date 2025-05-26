@@ -7,21 +7,67 @@
   justify-content: center;
 }
 
-.controlButton {
-  background-color: #333;
-  border: none;
-  color: var(--text-color);
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 30px;
-  margin: 4px 2px;
-  cursor: pointer;
-  height: 10vh;
-  width: 30vh;
+.controls {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+  flex-wrap: wrap;
 }
 
-.controlButton:hover {
+.button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border: 1px solid var(--secondary-color);
+}
+
+.button:hover {
   background-color: var(--hover);
+  transform: translateY(-1px);
+}
+
+.button:active {
+  transform: translateY(0);
+}
+
+.button.primary {
+  background-color: var(--active);
+  color: white;
+  border: none;
+}
+
+.button.primary:hover {
+  background-color: var(--active);
+  opacity: 0.9;
+}
+
+.button.danger {
+  background-color: #dc2626;
+  color: white;
+  border: none;
+}
+
+.button.danger:hover {
+  background-color: #b91c1c;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+@media (max-width: 640px) {
+  .controls {
+    flex-direction: column;
+  }
+  
+  .button {
+    width: 100%;
+  }
 }

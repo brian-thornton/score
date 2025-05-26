@@ -1,94 +1,256 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
 .tableHeading {
   color: var(--text-color);
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 700;
-  margin-bottom: 5px;
+  margin-bottom: 1rem;
 }
 
 .tableContainer {
-  background-color: var(--table-background);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-  max-width: 100%;
-  overflow-x: auto;
   width: 100%;
+  margin-bottom: 1.5rem;
+  background-color: var(--secondary-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
 .innerContainer {
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
+  width: 100%;
+  padding: 1rem;
 }
 
 .table {
-  background: var(--table-background);
-  border-collapse: collapse;
-  display: table;
-  font-family: system-ui, -apple-system, sans-serif;
-  table-layout: fixed;
   width: 100%;
+  border-collapse: collapse;
+  background-color: var(--primary-color);
 }
 
-.th {
-  background: var(--table-background);
-  border-bottom: 2px solid #4b4b4b;
+.tableHeader {
+  background-color: var(--secondary-color);
   color: var(--text-color);
   font-weight: 600;
-  padding: 1rem;
   text-align: left;
-}
-
-.td {
-  border-bottom: 1px solid #4b4b4b;
-  color: var(--text-color);
   padding: 1rem;
+  border-bottom: 2px solid var(--primary-color);
 }
 
-.tbody tr:hover {
-  background: var(--hover);
+.tableRow {
+  border-bottom: 1px solid var(--secondary-color);
+  transition: background-color 0.2s ease;
 }
 
-/* Responsive adjustments */
-@media (max-width: 640px) {
-  .th, .td {
-    padding: 0.75rem;
-  }
+.tableRow:hover {
+  background-color: var(--hover);
+}
+
+.tableCell {
+  padding: 1rem;
+  color: var(--text-color);
+}
+
+.tableCell:first-child {
+  padding-left: 1.5rem;
+}
+
+.tableCell:last-child {
+  padding-right: 1.5rem;
+}
+
+.emptyTable {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-color);
+  background-color: var(--primary-color);
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--secondary-color);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.filterGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 200px;
+}
+
+.filterLabel {
+  color: var(--text-color);
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.filterInput {
+  padding: 0.5rem;
+  background-color: var(--primary-color);
+  border: 1px solid var(--secondary-color);
+  border-radius: 4px;
+  color: var(--text-color);
+  width: 100%;
+  transition: all 0.2s ease;
+}
+
+.filterInput:focus {
+  outline: none;
+  border-color: var(--active);
+  box-shadow: 0 0 0 2px rgba(var(--active-rgb), 0.1);
+}
+
+.filterInput::placeholder {
+  color: var(--text-color);
+  opacity: 0.5;
+}
+
+.filterButton {
+  padding: 0.5rem 1rem;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border: 1px solid var(--secondary-color);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filterButton:hover {
+  background-color: var(--hover);
+  border-color: var(--hover);
+  transform: translateY(-1px);
+}
+
+.filterButton:active {
+  transform: translateY(0);
+}
+
+.filterButton.active {
+  background-color: var(--active);
+  color: white;
+  border-color: var(--active);
+}
+
+.filterButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.filterButton svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.filterButton svg path {
+  fill: currentColor;
 }
 
 .button {
-  background-color: darkgray;
-  border-radius: 5px;
-  border: none;
+  padding: 0.5rem 1rem;
+  background-color: var(--primary-color);
   color: var(--text-color);
+  border: 1px solid var(--secondary-color);
+  border-radius: 4px;
   cursor: pointer;
-  height: 30px;
-  margin-left: 10px;
-  width: 100px;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.button:hover {
+  background-color: var(--hover);
+  border-color: var(--hover);
+  transform: translateY(-1px);
+}
+
+.button:active {
+  transform: translateY(0);
 }
 
 .inputRow {
-  align-items: center;
-  border-color: #333333;
-  border-top: 1px solid #333333;
   display: flex;
-  flex-direction: row;
+  align-items: center;
   gap: 1rem;
+  padding: 1rem;
+  border-top: 1px solid var(--secondary-color);
+  background-color: var(--primary-color);
 }
 
-.editIcon {
-  margin-left: 10px;
+.editIcon, .deleteIcon {
+  color: var(--text-color);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.editIcon:hover, .deleteIcon:hover {
+  color: var(--active);
 }
 
 .input {
-  background-color: #333;
-  border-radius: 5px;
-  border: 1px solid darkgray;
+  padding: 0.5rem;
+  background-color: var(--primary-color);
+  border: 1px solid var(--secondary-color);
+  border-radius: 4px;
   color: var(--text-color);
-  height: 30px;
-  padding: 5px;
   width: 100%;
+  transition: all 0.2s ease;
 }
 
-.deleteIcon {
-  margin-left: 10px;
+.input:focus {
+  outline: none;
+  border-color: var(--active);
+  box-shadow: 0 0 0 2px rgba(var(--active-rgb), 0.1);
+}
+
+.input::placeholder {
+  color: var(--text-color);
+  opacity: 0.5;
+}
+
+@media (max-width: 640px) {
+  .filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .filterGroup {
+    flex-direction: column;
+    align-items: stretch;
+    min-width: 100%;
+  }
+  
+  .filterLabel {
+    margin-bottom: 0.25rem;
+  }
+  
+  .filterInput,
+  .filterButton {
+    width: 100%;
+  }
+  
+  .inputRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .button {
+    width: 100%;
+  }
 }

@@ -1,24 +1,43 @@
 .input {
-  background-color: #333;
-  border-radius: 5px;
-  border: 1px solid darkgray;
+  flex: 1;
+  min-width: 200px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--primary-color);
+  border-radius: 4px;
+  background-color: var(--primary-color);
   color: var(--text-color);
-  height: 30px;
-  padding: 5px;
-  width: 100%;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
 }
 
 .input:focus {
-  border-color: darkgray;
-  outline: darkgray;
+  outline: none;
+  border-color: var(--active);
+  box-shadow: 0 0 0 2px rgba(var(--active-rgb), 0.1);
+}
+
+.input::placeholder {
+  color: var(--text-color);
+  opacity: 0.5;
 }
 
 .filterRow {
-  align-items: center;
-  background-color: #333;
   display: flex;
-  flex-direction: row;
   gap: 1rem;
-  margin-left: 1rem;
-  margin-right: 1rem;
+  padding: 1rem;
+  background-color: var(--secondary-color);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 640px) {
+  .filterRow {
+    flex-direction: column;
+  }
+  
+  .input {
+    width: 100%;
+    min-width: 100%;
+  }
 }
