@@ -3,10 +3,10 @@ import React from 'react';
 import styles from './settings.module.css';
 
 const themes = [
-  { id: 'light', name: 'Light', colors: { primary: '#fafafa', secondary: '#f0f0f0', text: '#000000' } },
-  { id: 'deepblue', name: 'Deep Blue', colors: { primary: '#0c283d', secondary: '#2986cc', text: '#f5f5f5' } },
-  { id: 'forest', name: 'Forest', colors: { primary: '#1b4332', secondary: '#40916c', text: '#f5f5f5' } },
-  { id: 'matrix', name: 'Matrix', colors: { primary: '#000000', secondary: '#003300', text: '#00ff00' } },
+  { id: 'light', name: 'Light', colors: { primary: '#fafafa', secondary: '#f0f0f0', text: '#000000', hover: '#e5e5e5' } },
+  { id: 'deepblue', name: 'Deep Blue', colors: { primary: '#0c283d', secondary: '#2986cc', text: '#f5f5f5', hover: '#2986cc' } },
+  { id: 'forest', name: 'Forest', colors: { primary: '#1b4332', secondary: '#40916c', text: '#f5f5f5', hover: '#52b788' } },
+  { id: 'matrix', name: 'Matrix', colors: { primary: '#000000', secondary: '#003300', text: '#00ff00', hover: '#006600' } },
 ];
 
 export default function SettingsPage() {
@@ -38,6 +38,7 @@ export default function SettingsPage() {
       root.style.setProperty('--primary-color', theme.colors.primary);
       root.style.setProperty('--secondary-color', theme.colors.secondary);
       root.style.setProperty('--text-color', theme.colors.text);
+      root.style.setProperty('--hover', theme.colors.hover);
       localStorage.setItem('theme', selectedTheme);
     }
   }, [selectedTheme]);
