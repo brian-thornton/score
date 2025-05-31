@@ -1,47 +1,39 @@
 "use client";
 import React from 'react';
 import styles from './settings.module.css';
+import { ThemeContext } from '../components/ThemeProvider';
+import { exportMatchHistoryToPDF } from '@/app/lib/pdf-export';
 
 const themes = [
-  { id: 'light', name: 'Light', colors: { primary: '#fafafa', secondary: '#f0f0f0', text: '#000000', hover: '#e5e5e5' } },
   { id: 'deepblue', name: 'Deep Blue', colors: { primary: '#0c283d', secondary: '#2986cc', text: '#f5f5f5', hover: '#2986cc' } },
   { id: 'forest', name: 'Forest', colors: { primary: '#1b4332', secondary: '#40916c', text: '#f5f5f5', hover: '#52b788' } },
   { id: 'matrix', name: 'Matrix', colors: { primary: '#000000', secondary: '#003300', text: '#00ff00', hover: '#006600' } },
 ];
 
 export default function SettingsPage() {
-  const [selectedTheme, setSelectedTheme] = React.useState(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('theme') || 'light';
-    }
-    return 'light';
-  });
+  const { theme, setTheme } = React.useContext(ThemeContext);
+  const [isMounted, setIsMounted] = React.useState(false);
+  const [isExporting, setIsExporting] = React.useState(false);
 
-  // Initialize theme on component mount
   React.useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    // If no saved theme, use system preference
-    if (!savedTheme) {
-      const initialTheme = prefersDark ? 'dark' : 'light';
-      setSelectedTheme(initialTheme);
-      localStorage.setItem('theme', initialTheme);
-    }
+    setIsMounted(true);
   }, []);
 
-  // Apply theme changes
-  React.useEffect(() => {
-    const root = document.documentElement;
-    const theme = themes.find(t => t.id === selectedTheme);
-    if (theme) {
-      root.style.setProperty('--primary-color', theme.colors.primary);
-      root.style.setProperty('--secondary-color', theme.colors.secondary);
-      root.style.setProperty('--text-color', theme.colors.text);
-      root.style.setProperty('--hover', theme.colors.hover);
-      localStorage.setItem('theme', selectedTheme);
+  const handleExport = async () => {
+    try {
+      setIsExporting(true);
+      await exportMatchHistoryToPDF();
+    } catch (error) {
+      console.error('Error exporting match history:', error);
+      alert('Failed to export match history. Please try again.');
+    } finally {
+      setIsExporting(false);
     }
-  }, [selectedTheme]);
+  };
+
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <div className={styles.container}>
@@ -49,20 +41,30 @@ export default function SettingsPage() {
       <div className={styles.section}>
         <h2>Theme</h2>
         <div className={styles.themeGrid}>
-          {themes.map((theme) => (
+          {themes.map((themeOption) => (
             <button
-              key={theme.id}
-              className={`${styles.themeButton} ${selectedTheme === theme.id ? styles.selected : ''}`}
-              onClick={() => setSelectedTheme(theme.id)}
+              key={themeOption.id}
+              className={`${styles.themeButton} ${theme === themeOption.id ? styles.selected : ''}`}
+              onClick={() => setTheme(themeOption.id)}
               style={{
-                backgroundColor: theme.colors.primary,
-                color: theme.colors.text,
+                backgroundColor: themeOption.colors.primary,
+                color: themeOption.colors.text,
               }}
             >
-              {theme.name}
+              {themeOption.name}
             </button>
           ))}
         </div>
+      </div>
+      <div className={styles.section}>
+        <h2>Match History</h2>
+        <button 
+          className={styles.exportButton}
+          onClick={handleExport}
+          disabled={isExporting}
+        >
+          {isExporting ? 'Exporting...' : 'Export Match History to PDF'}
+        </button>
       </div>
     </div>
   );

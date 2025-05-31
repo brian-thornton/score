@@ -7,16 +7,19 @@ type FilterProps = {
 
 const Filters = ({ columns, onFilterChange }: FilterProps) => {
   return (
-    <div className={styles.filterRow}>
-      {columns.map((column, index) => (
-        <input
-          key={index}
-          onChange={(event) => onFilterChange(column, event.target.value)}
-          placeholder={`Filter by ${column}`}
-          className={styles.input}
-        />
-      ))}
-    </div>
+    <tbody>
+      <tr className={styles.filterRow}>
+        {columns.map((column, index) => (
+          <td key={index}>
+            <input
+              onChange={(event) => onFilterChange(column, event.target.value)}
+              placeholder={`Filter by ${column}`}
+              className={styles.input}
+            />
+          </td>
+        ))}
+      </tr>
+    </tbody>
   );
 };
 

@@ -3,6 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import styles from './Navbar.module.css';
+import { ThemeContext } from '@/app/components/ThemeProvider';
 
 interface NavLink {
   href: string;
@@ -22,9 +23,17 @@ const navLinks: NavLink[] = [
 const Navbar = () => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const { theme, setTheme } = React.useContext(ThemeContext);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const toggleTheme = () => {
+    const themes = ['deepblue', 'forest', 'matrix'];
+    const currentIndex = themes.indexOf(theme);
+    const nextIndex = (currentIndex + 1) % themes.length;
+    setTheme(themes[nextIndex]);
   };
 
   return (
@@ -47,6 +56,15 @@ const Navbar = () => {
             {link.label}
           </Link>
         ))}
+        <button 
+          className={styles.themeToggle}
+          onClick={toggleTheme}
+          title={`Current theme: ${theme}`}
+        >
+          {theme === 'deepblue' ? '🌊' : 
+           theme === 'forest' ? '🌲' : 
+           '💻'}
+        </button>
         <button 
           className={`${styles.hamburger} ${isMenuOpen ? styles.active : ''}`}
           onClick={toggleMenu}

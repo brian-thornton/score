@@ -1,9 +1,13 @@
-import styles from "./page.module.css";
+import AxeLogo from './components/AxeLogo/AxeLogo';
+import styles from './page.module.css';
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <img src="logo.png" alt="Logo" className={styles.image} />
-    </div>
+    <main className={styles.main}>
+      <AxeLogo />
+      <div className={styles.description}>
+        Welcome to Axe Score - Your Ultimate Axe Throwing Companion
+      </div>
+    </main>
   );
 }

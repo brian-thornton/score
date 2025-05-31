@@ -74,54 +74,52 @@ const TournamentPage = () => {
         />
       </div>
     );
-  };
+  }
 
-  return (
-    match ? (
-      <div className={styles.container}>
-        <GameHeader title="Singles Match" />
-        <MatchTable match={match} onScoreClick={onScoreClick} />
-        {!match.isComplete && (
-          <>
-            <ScoreInput possibleScores={[0, 1, 2, 3, 4, 6, 8, 10]} onChange={onScoreChange} match={match} />
+  return match ? (
+    <div className={styles.container}>
+      <GameHeader title="Singles Match" />
+      <MatchTable match={match} onScoreClick={onScoreClick} />
+      {!match.isComplete && (
+        <>
+          <ScoreInput possibleScores={[0, 1, 2, 3, 4, 6, 8, 10]} onChange={onScoreChange} match={match} />
+          <button className={styles.controlButton} onClick={endMatch}>End Match</button>
+        </>
+      )}
+      {match.isComplete && (
+        <>
+          <MatchResult match={match} />
+          <div className={styles.controlsRow}>
             <button className={styles.controlButton} onClick={endMatch}>End Match</button>
-          </>
-        )}
-        {match.isComplete && (
-          <>
-            <MatchResult match={match} />
-            <div className={styles.controlsRow}>
-              <button className={styles.controlButton} onClick={endMatch}>End Match</button>
-              <button
-                disabled={matchPlayers.length === 0}
-                className={styles.controlButton}
-                onClick={onStartMatch}>
-                Play Again
-              </button>
-            </div>
-          </>
-        )}
-      </div>
-    ) : (
-      <div className={styles.container}>
-        <Table
-          enableFilter
-          columns={columns}
-          data={displayPlayers}
-          deleteEnabled
-          editable
-          allowAdd={false}
-          selectable
-          onRowAddClick={onMatchPlayerAdd}
-        />
-        <button
-          disabled={matchPlayers.length === 0}
-          className={styles.controlButton}
-          onClick={onStartMatch}>
-          Start Match
-        </button>
-      </div>
-    )
+            <button
+              disabled={matchPlayers.length === 0}
+              className={styles.controlButton}
+              onClick={onStartMatch}>
+              Play Again
+            </button>
+          </div>
+        </>
+      )}
+    </div>
+  ) : (
+    <div className={styles.container}>
+      <Table
+        enableFilter
+        columns={columns}
+        data={displayPlayers}
+        deleteEnabled
+        editable
+        allowAdd={false}
+        selectable
+        onRowAddClick={onMatchPlayerAdd}
+      />
+      <button
+        disabled={matchPlayers.length === 0}
+        className={styles.controlButton}
+        onClick={onStartMatch}>
+        Start Match
+      </button>
+    </div>
   );
 };
 

@@ -56,9 +56,11 @@ const Table = ({
     <div className={styles.innerContainer}>
       {tableHeading && <div className={styles.tableHeading}>{tableHeading}</div>}
       <div className={styles.tableContainer}>
-        {enableFilter && rows.length > 0 && <Filters columns={columns} onFilterChange={onFilterChange} />}
         <table className={styles.table}>
           <TableHeader columns={columns} editable={editable} deleteEnabled={deleteEnabled} />
+          {enableFilter && rows.length > 0 && (
+            <Filters columns={columns} onFilterChange={onFilterChange} />
+          )}
           {rows.length === 0 && !addMode ? (
             <EmptyTable emptyText={emptyText} columns={columns} />
           ) : (

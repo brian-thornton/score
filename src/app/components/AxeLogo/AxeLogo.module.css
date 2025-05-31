@@ -1,0 +1,117 @@
+.logoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.crossedAxes {
+  position: relative;
+  width: 220px;
+  height: 220px;
+}
+
+.hatchet {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 120px;
+  height: 180px;
+  z-index: 1;
+}
+
+.left {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.right {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.handle {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 28px;
+  height: 120px;
+  background: #111;
+  border-radius: 40% 40% 60% 60%/60% 60% 100% 100%;
+  transform: translateX(-50%) skewX(-10deg);
+  z-index: 1;
+}
+
+.blade {
+  position: absolute;
+  left: 50%;
+  top: 18px;
+  width: 70px;
+  height: 54px;
+  background: #111;
+  clip-path: polygon(0 0, 100% 20%, 90% 100%, 10% 100%, 0 20%);
+  border-radius: 30% 80% 60% 40%/60% 100% 100% 60%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.text {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--text-color);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  margin-top: 1rem;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shine {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  50% {
+    text-shadow: 2px 2px 8px rgba(var(--active-rgb), 0.4);
+  }
+}
+
+/* Theme-specific styles */
+:root[data-theme="dark"] .bladeEdge {
+  background: linear-gradient(45deg, #1a1a1a, #3498db);
+}
+
+:root[data-theme="dark"] .bladeBody {
+  background: linear-gradient(45deg, #2c2c2c, #1a1a1a);
+}
+
+:root[data-theme="matrix"] .bladeEdge {
+  background: linear-gradient(45deg, #003300, #00ff00);
+}
+
+:root[data-theme="matrix"] .bladeBody {
+  background: linear-gradient(45deg, #001a00, #003300);
+}
+
+:root[data-theme="matrix"] .text {
+  color: #00ff00;
+  text-shadow: 0 0 5px #00ff00;
+} 
