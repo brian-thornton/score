@@ -29,7 +29,7 @@
   text-decoration: none;
   padding: 0.5rem 1rem;
   border-radius: 4px;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .navbarLink:hover {
@@ -37,8 +37,10 @@
 }
 
 .navbarLink.active {
-  background-color: var(--active);
-  color: white;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .themeToggle {

@@ -10,7 +10,7 @@ import { getPlayers } from "@/app/lib/api-clients/player-helper";
 import Table from "@/app/components/Table/Table";
 import MatchGoalTable from "@/app/components/MatchGoalTable/MatchGoalTable";
 import TargetList from "@/app/components/TargetList/TargetList";
-import { createTargetSet } from "@/app/lib/api-clients/target-set-helper";
+import { saveTargetSet } from "@/app/lib/api-clients/target-set-helper";
 import { createNewMatch, updateScore } from "@/app/lib/goal-match-manager";
 
 const TargetGoalPage = () => {
@@ -50,7 +50,7 @@ const TargetGoalPage = () => {
 
   const onTargetListChange = (targetSet: any) => {
     setPossibleScores(targetSet.targets);
-    createTargetSet(targetSet);
+    saveTargetSet(targetSet);
   }
 
   return match ? (
@@ -80,28 +80,45 @@ const TargetGoalPage = () => {
     </div>
   ) : (
     <div className={styles.container}>
-      <Table
-        enableFilter
-        columns={columns}
-        data={displayPlayers}
-        deleteEnabled
-        editable
-        allowAdd={false}
-        selectable
-        onRowAddClick={onMatchPlayerAdd}
-      />
-      <TargetList onTargetsChange={onTargetListChange} />
-      <div className={styles.controlsRow}>
-        <button
-          disabled={matchPlayers.length === 0}
-          className={styles.controlButton}
-          onClick={onStartMatch}>
-          Start Match
-        </button>
+      <div className={styles.header}>
+        <h1>Target Goal</h1>
+      </div>
+      <div className={styles.content}>
+        <div className={styles.leftSection}>
+          <div className={styles.section}>
+            <h2 className={styles.sectionTitle}>Available Players</h2>
+            <Table
+              enableFilter
+              columns={columns}
+              data={displayPlayers}
+              deleteEnabled
+              editable
+              allowAdd={false}
+              selectable
+              onRowAddClick={onMatchPlayerAdd}
+            />
+          </div>
+        </div>
+        <div className={styles.rightSection}>
+          <div className={styles.section}>
+            <h2 className={styles.sectionTitle}>Target Configuration</h2>
+            <TargetList onTargetsChange={onTargetListChange} />
+          </div>
+          <div className={styles.section}>
+            <h2 className={styles.sectionTitle}>Match Controls</h2>
+            <div className={styles.controlsRow}>
+              <button
+                disabled={matchPlayers.length === 0}
+                className={styles.controlButton}
+                onClick={onStartMatch}>
+                Start Match
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
-
 };
 
 export default TargetGoalPage;

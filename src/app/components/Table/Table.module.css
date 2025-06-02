@@ -3,13 +3,17 @@
   flex-direction: column;
   gap: 1.5rem;
   width: 100%;
+  background-color: var(--primary-color);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .tableHeading {
   color: var(--text-color);
   font-size: 1.25rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  padding: 0 1rem;
 }
 
 .tableContainer {
@@ -29,45 +33,42 @@
 .table {
   width: 100%;
   border-collapse: collapse;
+}
+
+.tr {
   background-color: var(--primary-color);
-}
-
-.tableHeader {
-  background-color: var(--secondary-color);
-  color: var(--text-color);
-  font-weight: 600;
-  text-align: left;
-  padding: 1rem;
-  border-bottom: 2px solid var(--primary-color);
-}
-
-.tableRow {
-  border-bottom: 1px solid var(--secondary-color);
   transition: background-color 0.2s ease;
 }
 
-.tableRow:hover {
+.tr:hover {
   background-color: var(--hover);
 }
 
-.tableCell {
+.tr.dragging {
+  background-color: var(--active);
+  opacity: 0.8;
+  cursor: grabbing;
+}
+
+.th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-color);
+  border-bottom: 2px solid var(--secondary-color);
+}
+
+.td {
   padding: 1rem;
   color: var(--text-color);
+  border-bottom: 1px solid var(--secondary-color);
 }
 
-.tableCell:first-child {
-  padding-left: 1.5rem;
-}
-
-.tableCell:last-child {
-  padding-right: 1.5rem;
-}
-
-.emptyTable {
+.emptyCell {
   text-align: center;
-  padding: 2rem;
   color: var(--text-color);
-  background-color: var(--primary-color);
+  opacity: 0.5;
+  padding: 2rem;
 }
 
 .filters {
@@ -96,13 +97,12 @@
 }
 
 .filterInput {
+  width: 100%;
   padding: 0.5rem;
-  background-color: var(--primary-color);
   border: 1px solid var(--secondary-color);
   border-radius: 4px;
+  background-color: var(--primary-color);
   color: var(--text-color);
-  width: 100%;
-  transition: all 0.2s ease;
 }
 
 .filterInput:focus {
@@ -204,13 +204,12 @@
 }
 
 .input {
+  width: 100%;
   padding: 0.5rem;
-  background-color: var(--primary-color);
   border: 1px solid var(--secondary-color);
   border-radius: 4px;
+  background-color: var(--primary-color);
   color: var(--text-color);
-  width: 100%;
-  transition: all 0.2s ease;
 }
 
 .input:focus {
@@ -224,33 +223,94 @@
   opacity: 0.5;
 }
 
+.deleteButton,
+.editButton,
+.addButton,
+.saveButton {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.deleteButton {
+  background-color: #dc2626;
+  color: white;
+}
+
+.deleteButton:hover {
+  background-color: #b91c1c;
+}
+
+.editButton {
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+}
+
+.editButton:hover {
+  background-color: var(--hover);
+}
+
+.addButton {
+  background-color: var(--active);
+  color: white;
+}
+
+.addButton:hover {
+  opacity: 0.9;
+}
+
+.saveButton {
+  background-color: var(--active);
+  color: white;
+}
+
+.saveButton:hover {
+  opacity: 0.9;
+}
+
 @media (max-width: 640px) {
   .filters {
     flex-direction: column;
     align-items: stretch;
   }
-  
+
   .filterGroup {
     flex-direction: column;
     align-items: stretch;
     min-width: 100%;
   }
-  
+
   .filterLabel {
     margin-bottom: 0.25rem;
   }
-  
+
   .filterInput,
   .filterButton {
     width: 100%;
   }
-  
+
   .inputRow {
     flex-direction: column;
     align-items: stretch;
   }
-  
+
   .button {
     width: 100%;
+  }
+
+  .th,
+  .td {
+    padding: 0.75rem;
+  }
+
+  .deleteButton,
+  .editButton,
+  .addButton,
+  .saveButton {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
   }
 }

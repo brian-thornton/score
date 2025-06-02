@@ -30,10 +30,12 @@ const Navbar = () => {
   };
 
   const toggleTheme = () => {
-    const themes = ['deepblue', 'forest', 'matrix'];
+    const themes = ['deepblue', 'forest', 'matrix', 'purple'];
     const currentIndex = themes.indexOf(theme);
     const nextIndex = (currentIndex + 1) % themes.length;
-    setTheme(themes[nextIndex]);
+    const nextTheme = themes[nextIndex];
+    console.log('Switching to theme:', nextTheme);
+    setTheme(nextTheme);
   };
 
   return (
@@ -63,7 +65,8 @@ const Navbar = () => {
         >
           {theme === 'deepblue' ? '🌊' : 
            theme === 'forest' ? '🌲' : 
-           '💻'}
+           theme === 'matrix' ? '💻' :
+           theme === 'purple' ? '💜' : '🌊'}
         </button>
         <button 
           className={`${styles.hamburger} ${isMenuOpen ? styles.active : ''}`}

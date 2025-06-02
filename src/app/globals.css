@@ -8,6 +8,35 @@
   --table-background: var(--secondary-color);
 }
 
+/* Theme-specific styles */
+:root[data-theme="deepblue"] {
+  --primary-color: #0c283d;
+  --secondary-color: #2986cc;
+  --text-color: #f5f5f5;
+  --hover: #2986cc;
+}
+
+:root[data-theme="forest"] {
+  --primary-color: #1b4332;
+  --secondary-color: #40916c;
+  --text-color: #f5f5f5;
+  --hover: #52b788;
+}
+
+:root[data-theme="matrix"] {
+  --primary-color: #000000;
+  --secondary-color: #003300;
+  --text-color: #00ff00;
+  --hover: #006600;
+}
+
+:root[data-theme="purple"] {
+  --primary-color: #2d1b69;
+  --secondary-color: #6b4caf;
+  --text-color: #f5f5f5;
+  --hover: #8a6dff;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --primary-color: #1a1a1a;

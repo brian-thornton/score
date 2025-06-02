@@ -133,7 +133,6 @@ const TargetNumberPage = () => {
 
   return (
     <div className={styles.container}>
-      <GameHeader title={`Target Number - First to ${match.targetNumber}`} />
       <MatchTable
         onScoreClick={onScoreClick}
         match={match}

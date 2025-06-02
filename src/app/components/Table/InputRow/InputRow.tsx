@@ -1,7 +1,6 @@
 "use client";
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-
 import styles from './InputRow.module.css';
 
 type InputRowProps = {
@@ -11,30 +10,38 @@ type InputRowProps = {
 };
 
 const InputRow = ({ columns, onSave, setAddMode }: InputRowProps) => {
-  const [newRow, setNewRow] = useState<any>({});
+  const [newRow, setNewRow] = useState<string[]>(Array(columns.length).fill(""));
+
+  const handleInputChange = (index: number, value: string) => {
+    const updatedRow = [...newRow];
+    updatedRow[index] = value;
+    setNewRow(updatedRow);
+  };
+
+  const handleSave = () => {
+    if (onSave) {
+      onSave(newRow);
+    }
+    setAddMode(false);
+  };
 
   return (
     <tr className={styles.tr}>
-    {columns.map((column, index) => (
-      <td key={index} className={styles.td}>
-        <input className={styles.input}
-          onChange={() => {
-            // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-            setNewRow({ ...newRow, id: uuidv4(), [column.toLowerCase()]: event.target.value });
-          }} />
+      {columns.map((column, index) => (
+        <td key={index} className={styles.td}>
+          <input 
+            className={styles.input}
+            value={newRow[index]}
+            onChange={(e) => handleInputChange(index, e.target.value)}
+          />
+        </td>
+      ))}
+      <td className={styles.td}>
+        <button className={styles.button} onClick={handleSave}>Save</button>
+        <button className={styles.button} onClick={() => setAddMode(false)}>Cancel</button>
       </td>
-    ))}
-    <td className={styles.td}>
-      <button className={styles.button} onClick={() => {
-        setAddMode(false);
-        onSave && onSave(newRow);
-      }}>
-        Save
-      </button>
-      <button className={styles.button} onClick={() => setAddMode(false)}>Cancel</button>
-    </td>
-  </tr>
+    </tr>
   );
-}
+};
 
 export default InputRow;

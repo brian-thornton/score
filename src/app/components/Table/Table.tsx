@@ -43,6 +43,9 @@ const Table = ({
 }: TableProps) => {
   const [addMode, setAddMode] = useState<boolean>(false);
   const [rows, setRows] = useState<any[]>(data);
+  const [editingIndex, setEditingIndex] = useState<number | null>(null);
+  const [newRow, setNewRow] = useState<string[]>(Array(columns.length).fill(""));
+  const [filter, setFilter] = useState("");
 
   const onFilterChange = (column: string, filter: string) => {
     setRows(data.filter((row) => row[columns.indexOf(column)].toLowerCase().includes(filter.toLowerCase())));
@@ -51,6 +54,42 @@ const Table = ({
   useEffect(() => {
     setRows(data);
   }, [data]);
+
+  const handleEdit = (index: number) => {
+    setEditingIndex(index);
+  };
+
+  const handleSave = () => {
+    if (onSave) {
+      onSave(newRow);
+      setNewRow(Array(columns.length).fill(""));
+    }
+    setEditingIndex(null);
+  };
+
+  const handleCancel = () => {
+    setEditingIndex(null);
+  };
+
+  const handleInputChange = (index: number, value: string) => {
+    const updatedRow = [...newRow];
+    updatedRow[index] = value;
+    setNewRow(updatedRow);
+  };
+
+  const handleAddClick = (row: string[]) => {
+    if (onRowAddClick) {
+      onRowAddClick(row);
+    }
+  };
+
+  const filteredData = enableFilter
+    ? data.filter((row) =>
+        row.some((cell) =>
+          (cell?.toLowerCase() || '').includes(filter.toLowerCase())
+        )
+      )
+    : data;
 
   return (
     <div className={styles.innerContainer}>

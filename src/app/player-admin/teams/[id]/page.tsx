@@ -15,6 +15,7 @@ const TeamPage = () => {
   const [playerRows, setPlayerRows] = useState<string[][]>([]);
   const [players, setPlayers] = useState<Player[]>([]);
   const [teamPlayers, setTeamPlayers] = useState<string[][]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const loadData = async () => {
     const data = await getTeams();
@@ -57,31 +58,57 @@ const TeamPage = () => {
     await loadData();
   };
 
+  const filteredPlayers = playerRows.filter(player => 
+    (player[0]?.toLowerCase() || '').includes(searchTerm.toLowerCase()) ||
+    (player[1]?.toLowerCase() || '').includes(searchTerm.toLowerCase())
+  );
+
   useEffect(() => {
     loadData();
   }, []);
 
   return (
     <div className={styles.container}>
-      <Table
-        columns={columns}
-        data={playerRows}
-        editable
-        emptyText="All players have been assigned to the team."
-        enableFilter
-        onRowAddClick={onAddToTeam}
-        selectable
-        tableHeading={`Available Players`}
-        deleteEnabled={false}
-      />
-      <Table
-        columns={columns}
-        data={teamPlayers}
-        deleteEnabled
-        emptyText="No players have been added to the team."
-        onDeleteClick={onRemoveFromTeam}
-        tableHeading={`Team ${team?.name} Players`}
-      />
+      <div className={styles.header}>
+        <h1>Team Builder: {team?.name}</h1>
+      </div>
+
+      <div className={styles.searchContainer}>
+        <input
+          type="text"
+          placeholder="Search players..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className={styles.searchInput}
+        />
+      </div>
+
+      <div className={styles.tablesContainer}>
+        <div className={styles.tableSection}>
+          <h2>Available Players</h2>
+          <Table
+            columns={columns}
+            data={filteredPlayers}
+            editable
+            emptyText="All players have been assigned to the team."
+            enableFilter={false}
+            onRowAddClick={onAddToTeam}
+            selectable
+            deleteEnabled={false}
+          />
+        </div>
+
+        <div className={styles.tableSection}>
+          <h2>Team Players</h2>
+          <Table
+            columns={columns}
+            data={teamPlayers}
+            deleteEnabled
+            emptyText="No players have been added to the team."
+            onDeleteClick={onRemoveFromTeam}
+          />
+        </div>
+      </div>
     </div>
   );
 };

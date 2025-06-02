@@ -1,18 +1,17 @@
 .container {
-  background-color: var(--primary-color);
-  padding: 1.5rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 2rem;
+  gap: 6rem;
+  padding: 1rem;
 }
 
 .buttonsContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  width: 300px;
+  justify-items: center;
 }
 
 .scoreButton {
@@ -25,12 +24,47 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
-  min-width: 120px;
+  min-width: 80px;
   min-height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.endMatchButton {
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--active);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.endMatchButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.endMatchButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Center last row for 8 or 10 buttons */
+.scoreButton:nth-last-child(1):nth-child(8),
+.scoreButton:nth-last-child(1):nth-child(10) {
+  grid-column: 2;
+}
+
+.scoreButton:nth-last-child(2):nth-child(9),
+.scoreButton:nth-last-child(2):nth-child(10) {
+  grid-column: 1;
 }
 
 .scoreButton:hover {
@@ -161,7 +195,7 @@
   .scoreButton {
     padding: 1rem 1.5rem;
     font-size: 1.25rem;
-    min-width: 100px;
+    min-width: 70px;
     min-height: 70px;
   }
 }
@@ -170,6 +204,12 @@
   .container {
     padding: 1rem;
     gap: 1rem;
+    flex-direction: column;
+  }
+  
+  .buttonsContainer {
+    width: 100%;
+    max-width: 300px;
   }
   
   .scoreButton {
@@ -180,28 +220,13 @@
     min-height: 60px;
   }
   
-  .bullseyeContainer {
-    width: 300px;
-    height: 300px;
-  }
-  
-  .killshotLeft, .killshotRight {
-    width: 30px;
-    height: 30px;
-  }
-  
-  .killshotLeft {
-    left: 15px;
-    top: 15px;
-  }
-  
-  .killshotRight {
-    right: 15px;
-    top: 15px;
-  }
-  
-  .ring {
-    border-width: 4px;
+  .bullseyeContainer,
+  .bullseye,
+  .killshotLeft,
+  .killshotRight,
+  .ring,
+  .center {
+    display: none;
   }
 }
 
@@ -318,5 +343,63 @@
   100% {
     transform: scale(1);
     opacity: 1;
+  }
+}
+
+.particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--active);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.particle:nth-child(1) { --tx: 50px; --ty: -50px; }
+.particle:nth-child(2) { --tx: -50px; --ty: -50px; }
+.particle:nth-child(3) { --tx: 50px; --ty: 50px; }
+.particle:nth-child(4) { --tx: -50px; --ty: 50px; }
+.particle:nth-child(5) { --tx: 0; --ty: -70px; }
+.particle:nth-child(6) { --tx: 70px; --ty: 0; }
+.particle:nth-child(7) { --tx: -70px; --ty: 0; }
+.particle:nth-child(8) { --tx: 0; --ty: 70px; }
+
+.particle {
+  animation: particleBurst 0.8s ease-out forwards;
+}
+
+@keyframes particleBurst {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) scale(0);
+    opacity: 0;
+  }
+}
+
+@media (max-height: 800px) {
+  .bullseyeContainer {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .killshotLeft, .killshotRight {
+    width: 30px;
+    height: 30px;
+    top: 15px;
+  }
+  
+  .killshotLeft {
+    left: 15px;
+  }
+  
+  .killshotRight {
+    right: 15px;
+  }
+  
+  .ring {
+    border-width: 4px;
   }
 }

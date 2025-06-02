@@ -1,51 +1,47 @@
-import { TargetSet } from '../types';
+const STORAGE_KEY = 'target-sets';
 
-const baseUrl = '/api';
+interface TargetSet {
+  id: string;
+  name: string;
+  targets: string[];
+}
 
-export const getTargetSets = (): Promise<TargetSet[]> => {
-  return new Promise((resolve, reject) => {
-    const url = `${baseUrl}/target-sets`;
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        resolve(data);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
-};
-
-export const createTargetSet = async (targetSet: TargetSet): Promise<TargetSet> => {
-  return new Promise(async (resolve, reject) => {
-    let targetSets = await getTargetSets();
-
-    if (targetSets && targetSets.length > 0) {
-      const existingTargetSet = targetSets.find((t) => t.name === targetSet.name);
-
-      if (existingTargetSet) {
-        targetSets = targetSets.filter((t) => t.name !== targetSet.name);
-      }
-
+export const saveTargetSet = (targetSet: TargetSet) => {
+  try {
+    const targetSets = getTargetSets();
+    const existingIndex = targetSets.findIndex(set => set.id === targetSet.id);
+    
+    if (existingIndex >= 0) {
+      targetSets[existingIndex] = targetSet;
+    } else {
       targetSets.push(targetSet);
     }
+    
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(targetSets));
+    return targetSet;
+  } catch (error) {
+    console.error('Error saving target set:', error);
+    throw error;
+  }
+};
 
-    targetSets = [targetSet];
+export const getTargetSets = (): TargetSet[] => {
+  try {
+    const data = localStorage.getItem(STORAGE_KEY);
+    return data ? JSON.parse(data) : [];
+  } catch (error) {
+    console.error('Error reading target sets:', error);
+    return [];
+  }
+};
 
-    const url = `${baseUrl}/target-sets`;
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(targetSets),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        resolve(data);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
+export const deleteTargetSet = (id: string) => {
+  try {
+    const targetSets = getTargetSets();
+    const filteredSets = targetSets.filter(set => set.id !== id);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(filteredSets));
+  } catch (error) {
+    console.error('Error deleting target set:', error);
+    throw error;
+  }
 };

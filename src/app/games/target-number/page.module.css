@@ -9,8 +9,8 @@
 
 .controlButton {
   padding: 0.75rem 1.5rem;
-  background-color: var(--active);
-  color: white;
+  background-color: var(--secondary-color);
+  color: var(--text-color);
   border: none;
   border-radius: 6px;
   font-size: 1.25rem;
@@ -19,15 +19,18 @@
   transition: all 0.2s ease;
   min-width: 200px;
   margin: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .controlButton:hover {
-  opacity: 0.9;
+  background-color: var(--hover);
   transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 }
 
 .controlButton:active {
   transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .controlButton:disabled {

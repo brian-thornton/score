@@ -78,7 +78,6 @@ const TournamentPage = () => {
 
   return match ? (
     <div className={styles.container}>
-      <GameHeader title="Singles Match" />
       <MatchTable match={match} onScoreClick={onScoreClick} />
       {!match.isComplete && (
         <>

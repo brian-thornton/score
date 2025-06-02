@@ -24,7 +24,13 @@ const PlayersPage = () => {
   }, []);
 
   const onSavePlayers = async (newPlayer: any) => {
-    await createPlayer([newPlayer]);
+    const player: Player = {
+      id: crypto.randomUUID(),
+      name: newPlayer[0],
+      email: newPlayer[1],
+      phone: newPlayer[2] || '',
+    };
+    await createPlayer([player]);
     loadPlayers();
   };
 

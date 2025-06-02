@@ -11,7 +11,7 @@ const PlayerEdit = ({ player, onSave, onCancel }: PlayerEditProps) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    
+
     const updatedPlayer: Player = {
       id: player.id,
       name: formData.get('name') as string,
@@ -31,7 +31,6 @@ const PlayerEdit = ({ player, onSave, onCancel }: PlayerEditProps) => {
           id="name"
           name="name"
           defaultValue={player.name}
-          required
           className={styles.input}
         />
       </div>
@@ -42,7 +41,6 @@ const PlayerEdit = ({ player, onSave, onCancel }: PlayerEditProps) => {
           id="email"
           name="email"
           defaultValue={player.email}
-          required
           className={styles.input}
         />
       </div>
@@ -53,7 +51,6 @@ const PlayerEdit = ({ player, onSave, onCancel }: PlayerEditProps) => {
           id="phone"
           name="phone"
           defaultValue={player.phone}
-          required
           className={styles.input}
         />
       </div>

@@ -1,16 +1,64 @@
 .container {
   margin: 0 auto;
   background-color: var(--primary-color);
-  height: 100vh;
+  min-height: 100vh;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
+  gap: 2rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
+  margin-bottom: 1rem;
+}
+
+.header h1 {
+  color: var(--text-color);
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.leftSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.rightSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.section {
+  background-color: var(--secondary-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sectionTitle {
+  color: var(--text-color);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
 }
 
 .controlButton {
   padding: 0.75rem 1.5rem;
-  background-color: var(--active);
-  color: white;
+  background-color: var(--secondary-color);
+  color: var(--text-color);
   border: none;
   border-radius: 6px;
   font-size: 1.25rem;
@@ -19,15 +67,18 @@
   transition: all 0.2s ease;
   min-width: 200px;
   margin: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .controlButton:hover {
-  opacity: 0.9;
+  background-color: var(--hover);
   transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 }
 
 .controlButton:active {
   transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .controlButton:disabled {
@@ -45,11 +96,33 @@
   justify-content: center;
 }
 
+@media (max-width: 1024px) {
+  .content {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 640px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .section {
+    padding: 1rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.125rem;
+  }
+
   .controlsRow {
     flex-direction: column;
   }
-  
+
   .controlButton {
     width: 100%;
     min-width: 100%;
@@ -57,9 +130,9 @@
 }
 
 .targetNumberInput {
-  background-color: #333;
+  background-color: var(--primary-color);
   border-radius: 5px;
-  border: 1px solid darkgray;
+  border: 1px solid var(--secondary-color);
   color: var(--text-color);
   height: 50px;
   padding: 5px;

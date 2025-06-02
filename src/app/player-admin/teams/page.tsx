@@ -40,7 +40,6 @@ const TeamsPage = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.header}>Teams</h1>
       <Table
         columns={columns}
         data={teamRows}
