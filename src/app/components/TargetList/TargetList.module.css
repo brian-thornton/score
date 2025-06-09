@@ -129,6 +129,7 @@
   border-radius: 4px;
   color: var(--text-color);
   min-width: fit-content;
+  width: auto;
 }
 
 .targetItem span {

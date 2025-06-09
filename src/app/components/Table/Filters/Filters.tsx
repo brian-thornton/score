@@ -2,10 +2,11 @@ import styles from './Filters.module.css';
 
 type FilterProps = {
   columns: string[];
+  emptyRightColumn?: boolean;
   onFilterChange: (column: string, filter: string) => void;
 };
 
-const Filters = ({ columns, onFilterChange }: FilterProps) => {
+const Filters = ({ columns, onFilterChange, emptyRightColumn }: FilterProps) => {
   return (
     <tbody>
       <tr className={styles.filterRow}>
@@ -18,6 +19,7 @@ const Filters = ({ columns, onFilterChange }: FilterProps) => {
             />
           </td>
         ))}
+        {emptyRightColumn && <td></td>}
       </tr>
     </tbody>
   );

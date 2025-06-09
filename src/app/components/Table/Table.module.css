@@ -33,11 +33,16 @@
 .table {
   width: 100%;
   border-collapse: collapse;
+  border: 1px solid var(--secondary-color);
 }
 
 .tr {
   background-color: var(--primary-color);
   transition: background-color 0.2s ease;
+}
+
+.tr:nth-child(even) {
+  background-color: var(--secondary-color);
 }
 
 .tr:hover {
@@ -55,13 +60,14 @@
   text-align: left;
   font-weight: 600;
   color: var(--text-color);
-  border-bottom: 2px solid var(--secondary-color);
+  border: 1px solid var(--secondary-color);
+  background-color: var(--primary-color);
 }
 
 .td {
   padding: 1rem;
   color: var(--text-color);
-  border-bottom: 1px solid var(--secondary-color);
+  border: 1px solid var(--secondary-color);
 }
 
 .emptyCell {
@@ -76,7 +82,7 @@
   flex-wrap: wrap;
   gap: 1rem;
   padding: 1rem;
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   border-radius: 8px;
   margin-bottom: 1rem;
 }
@@ -164,19 +170,17 @@
 
 .button {
   padding: 0.5rem 1rem;
-  background-color: var(--primary-color);
+  background-color: var(--secondary-color);
   color: var(--text-color);
-  border: 1px solid var(--secondary-color);
+  border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 0.875rem;
   font-weight: 500;
+  transition: all 0.2s ease;
 }
 
 .button:hover {
   background-color: var(--hover);
-  border-color: var(--hover);
   transform: translateY(-1px);
 }
 
@@ -186,11 +190,10 @@
 
 .inputRow {
   display: flex;
-  align-items: center;
   gap: 1rem;
   padding: 1rem;
-  border-top: 1px solid var(--secondary-color);
   background-color: var(--primary-color);
+  border-top: 1px solid var(--secondary-color);
 }
 
 .editIcon, .deleteIcon {

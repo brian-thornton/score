@@ -6,7 +6,7 @@
 }
 
 .tableContainer {
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 1.5rem;
   max-width: 100%;
@@ -25,8 +25,8 @@
 }
 
 .th {
-  background: var(--secondary-color);
-  border-bottom: 2px solid var(--primary-color);
+  background: var(--primary-color);
+  border-bottom: 2px solid var(--secondary-color);
   color: var(--text-color);
   font-weight: 600;
   padding: 1rem;
@@ -37,6 +37,11 @@
   border-bottom: 1px solid var(--secondary-color);
   color: var(--text-color);
   padding: 1rem;
+}
+
+.tr {
+  background-color: var(--primary-color);
+  transition: background-color 0.2s ease;
 }
 
 .tbody tr:hover {
@@ -95,6 +100,7 @@
   color: var(--text-color);
   cursor: pointer;
   transition: color 0.2s ease;
+  margin-right: 1rem;
 }
 
 .editIcon:hover {

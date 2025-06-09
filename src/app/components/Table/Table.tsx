@@ -98,7 +98,7 @@ const Table = ({
         <table className={styles.table}>
           <TableHeader columns={columns} editable={editable} deleteEnabled={deleteEnabled} />
           {enableFilter && rows.length > 0 && (
-            <Filters columns={columns} onFilterChange={onFilterChange} />
+            <Filters columns={columns} emptyRightColumn={true} onFilterChange={onFilterChange} />
           )}
           {rows.length === 0 && !addMode ? (
             <EmptyTable emptyText={emptyText} columns={columns} />
