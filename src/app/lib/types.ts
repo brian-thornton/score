@@ -22,6 +22,7 @@ export enum MatchType {
   SINGLES_TOURNAMENT = 'SINGLES_TOURNAMENT',
   TARGET_NUMBER = 'TARGET_NUMBER',
   GOAL_MATCH = 'GOAL_MATCH',
+  CORNHOLE = 'CORNHOLE',
 };
 
 export type Match = {

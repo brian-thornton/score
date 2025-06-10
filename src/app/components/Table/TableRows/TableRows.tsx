@@ -13,14 +13,12 @@ type TableRowsProps = {
   deleteEnabled: boolean;
   selectable?: boolean;
   editable?: boolean;
-  addMode: boolean;
   onRowAddClick?: (rowObject: any) => void;
   onSave?: (obj: any) => void;
-  setAddMode: (addMode: boolean) => void;
+  allowAdd: boolean;
 };
 
 const TableRows = ({
-  addMode,
   columns,
   deleteEnabled,
   editable,
@@ -30,7 +28,7 @@ const TableRows = ({
   onSave,
   rows,
   selectable,
-  setAddMode,
+  allowAdd,
 }: TableRowsProps) => {
   const [selectedRows, setSelectedRows] = useState<number[]>([]);
 
@@ -60,11 +58,11 @@ const TableRows = ({
           )}
         </tr>
       ))}
-      {addMode && (
+      {onRowAddClick && editable && allowAdd && (
         <InputRow
           columns={columns}
           onSave={onSave}
-          setAddMode={setAddMode}
+          setAddMode={() => {}}
         />
       )}
     </tbody>

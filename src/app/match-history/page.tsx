@@ -52,8 +52,8 @@ const MatchHistoryPage = () => {
               {match.matchType !== 'GOAL_MATCH' && (
                 <MatchTable
                   match={match}
-                  displayStartRound={match.matchType === 'TARGET_NUMBER' ? getFirstRound(getMatchMaxRounds(match)) : undefined}
-                  displayEndRound={match.matchType === 'TARGET_NUMBER' ? getMatchMaxRounds(match) : undefined}
+                  displayStartRound={match.matchType === 'TARGET_NUMBER' || match.matchType === 'CORNHOLE' ? getFirstRound(getMatchMaxRounds(match)) : undefined}
+                  displayEndRound={match.matchType === 'TARGET_NUMBER' || match.matchType === 'CORNHOLE' ? getMatchMaxRounds(match) : undefined}
                 />
               )}
             </>

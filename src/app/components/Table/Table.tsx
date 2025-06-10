@@ -19,7 +19,6 @@ type TableProps = {
   onDone?: () => void;
   onEditClick?: (index: number) => void;
   onRowAddClick?: (rowObject: any) => void;
-  onSave?: (obj: any) => void;
   selectable?: boolean;
   tableHeading?: string;
 };
@@ -37,14 +36,10 @@ const Table = ({
   onDone,
   onEditClick,
   onRowAddClick,
-  onSave,
   selectable,
   tableHeading,
 }: TableProps) => {
-  const [addMode, setAddMode] = useState<boolean>(false);
   const [rows, setRows] = useState<any[]>(data);
-  const [editingIndex, setEditingIndex] = useState<number | null>(null);
-  const [newRow, setNewRow] = useState<string[]>(Array(columns.length).fill(""));
   const [filter, setFilter] = useState("");
 
   const onFilterChange = (column: string, filter: string) => {
@@ -55,42 +50,6 @@ const Table = ({
     setRows(data);
   }, [data]);
 
-  const handleEdit = (index: number) => {
-    setEditingIndex(index);
-  };
-
-  const handleSave = () => {
-    if (onSave) {
-      onSave(newRow);
-      setNewRow(Array(columns.length).fill(""));
-    }
-    setEditingIndex(null);
-  };
-
-  const handleCancel = () => {
-    setEditingIndex(null);
-  };
-
-  const handleInputChange = (index: number, value: string) => {
-    const updatedRow = [...newRow];
-    updatedRow[index] = value;
-    setNewRow(updatedRow);
-  };
-
-  const handleAddClick = (row: string[]) => {
-    if (onRowAddClick) {
-      onRowAddClick(row);
-    }
-  };
-
-  const filteredData = enableFilter
-    ? data.filter((row) =>
-        row.some((cell) =>
-          (cell?.toLowerCase() || '').includes(filter.toLowerCase())
-        )
-      )
-    : data;
-
   return (
     <div className={styles.innerContainer}>
       {tableHeading && <div className={styles.tableHeading}>{tableHeading}</div>}
@@ -100,25 +59,22 @@ const Table = ({
           {enableFilter && rows.length > 0 && (
             <Filters columns={columns} emptyRightColumn={true} onFilterChange={onFilterChange} />
           )}
-          {rows.length === 0 && !addMode ? (
+          {rows.length === 0 ? (
             <EmptyTable emptyText={emptyText} columns={columns} />
           ) : (
             <TableRows
-              addMode={addMode}
               columns={columns}
               deleteEnabled={deleteEnabled}
               editable={editable}
               onDeleteClick={onDeleteClick}
               onEditClick={onEditClick}
               onRowAddClick={onRowAddClick}
-              onSave={onSave}
               rows={rows}
               selectable={selectable}
-              setAddMode={setAddMode}
             />
           )}
         </table>
-        {!addMode && editable && allowAdd && (
+        {editable && allowAdd && (
           <div className={styles.inputRow}>
             <button
               className={styles.button}
@@ -126,7 +82,7 @@ const Table = ({
                 if (addUrl) {
                   window.location.replace(addUrl);
                 } else {
-                  setAddMode(true);
+                  setRows(data);
                 }
               }}
             >

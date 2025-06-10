@@ -16,6 +16,7 @@ const navLinks: NavLink[] = [
   { href: '/games/tournament', label: 'Tournament' },
   { href: '/games/target-number', label: 'Target Number' },
   { href: '/games/target-goal', label: 'Targets' },
+  { href: '/games/cornhole', label: 'Cornhole' },
   { href: '/match-history', label: 'Match History' },
   { href: '/settings', label: 'Settings' },
 ];
@@ -68,16 +69,16 @@ const Navbar = () => {
            theme === 'matrix' ? '💻' :
            theme === 'purple' ? '💜' : '🌊'}
         </button>
-        <button 
-          className={`${styles.hamburger} ${isMenuOpen ? styles.active : ''}`}
-          onClick={toggleMenu}
-          aria-label="Toggle menu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
       </div>
+      <button 
+        className={`${styles.hamburger} ${isMenuOpen ? styles.active : ''}`}
+        onClick={toggleMenu}
+        aria-label="Toggle menu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </nav>
   );
 };

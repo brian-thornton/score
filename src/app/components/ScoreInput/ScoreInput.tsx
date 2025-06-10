@@ -5,6 +5,7 @@ type ScoreInputProps = {
   possibleScores: number[] | string[];
   onChange: (match: Match, score: number | string, possibleScores: string[] | undefined) => void;
   match: Match;
+  hideBullseye?: boolean;
 };
 
 const BullseyeTarget = ({ match, onChange }: { match: Match; onChange: ScoreInputProps['onChange'] }) => {
@@ -55,7 +56,7 @@ const BullseyeTarget = ({ match, onChange }: { match: Match; onChange: ScoreInpu
   );
 };
 
-const ScoreInput = ({ match, possibleScores, onChange }: ScoreInputProps) => {
+const ScoreInput = ({ match, possibleScores, onChange, hideBullseye }: ScoreInputProps) => {
   return (
     <div className={styles.container}>
       <div className={styles.buttonsContainer}>
@@ -69,7 +70,7 @@ const ScoreInput = ({ match, possibleScores, onChange }: ScoreInputProps) => {
           </button>
         ))}
       </div>
-      <BullseyeTarget match={match} onChange={onChange} />
+      {!hideBullseye && <BullseyeTarget match={match} onChange={onChange} />}
     </div>
   );
 };

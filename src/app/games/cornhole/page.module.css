@@ -1,0 +1,302 @@
+.container {
+  margin: 0 auto;
+  background-color: var(--primary-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem 0 1.5rem 1.5rem;
+  gap: 1.5rem;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.header h1 {
+  color: var(--text-color);
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  gap: 2rem;
+  padding: 0 1.5rem;
+}
+
+.leftSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.leftSection .section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  margin-right: 0;
+  margin-left: 0;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.rightSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-right: 0;
+}
+
+.rightSection .section {
+  border-radius: 16px;
+  margin-left: 0;
+  margin-right: 0;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.section {
+  background-color: var(--secondary-color);
+  padding: 2rem;
+  border: 1px solid var(--hover);
+  border-radius: 16px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  flex: 1;
+}
+
+.sectionTitle {
+  color: var(--text-color);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+}
+
+.controlsRow {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.controlButton {
+  padding: 0.75rem 1.5rem;
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: 6px;
+  font-size: 1.25rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 150px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.controlButton:hover {
+  background-color: var(--hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.controlButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.controlButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.startMatchButton {
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border: 2px solid var(--secondary-color);
+  border-radius: 6px;
+  font-size: 1.25rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 150px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.startMatchButton:hover {
+  background-color: var(--hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.startMatchButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.startMatchButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.matchStats {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  width: 100%;
+  justify-content: center;
+}
+
+.playerStat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--secondary-color);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 250px;
+  text-align: center;
+}
+
+.playerName {
+  color: var(--text-color);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.playerScore {
+  color: var(--text-color);
+  font-size: 2.5rem;
+  font-weight: 800;
+}
+
+.activePlayer {
+  border: 2px solid var(--active);
+  box-shadow: 0 0 15px rgba(var(--active-rgb), 0.5);
+}
+
+.currentRound {
+  color: var(--text-color);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.scoreInputsContainer {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.playerScoreSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--secondary-color);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.playerName {
+  color: var(--text-color);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.scoreButtons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.scoreButton {
+  padding: 1rem 2rem;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border: 2px solid var(--secondary-color);
+  border-radius: 6px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.scoreButton:hover {
+  background-color: var(--hover);
+  transform: translateY(-1px);
+}
+
+.scoreButton:active {
+  transform: translateY(0);
+}
+
+.scoreButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+@media (max-width: 1024px) {
+  .content {
+    grid-template-columns: 1fr;
+  }
+  .matchStats {
+    flex-direction: column;
+    align-items: center;
+  }
+  .playerStat {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 1rem;
+    gap: 1rem;
+  }
+  .header h1 {
+    font-size: 1.5rem;
+  }
+  .section {
+    padding: 1rem;
+  }
+  .sectionTitle {
+    font-size: 1rem;
+  }
+  .controlsRow {
+    flex-direction: column;
+  }
+  .controlButton {
+    width: 100%;
+    min-width: unset;
+  }
+  .playerStat {
+    padding: 1rem;
+  }
+  .playerName {
+    font-size: 1.25rem;
+  }
+  .playerScore {
+    font-size: 2rem;
+  }
+  .currentRound {
+    font-size: 1.25rem;
+  }
+} 
