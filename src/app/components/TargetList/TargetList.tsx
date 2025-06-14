@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import styles from "./TargetList.module.css";
-import { getTargetSets, saveTargetSet, deleteTargetSet } from "@/app/lib/api-clients/target-set-helper";
+import { getTargetSets, saveTargetSet, deleteTargetSet, removeBlankTargetSets } from "@/app/lib/api-clients/target-set-helper";
 
 interface TargetSet {
   id: string;
@@ -25,7 +25,7 @@ const TargetList = ({ onTargetsChange }: TargetListProps) => {
   }, []);
 
   const loadTargetSets = () => {
-    const sets = getTargetSets();
+    const sets = removeBlankTargetSets();
     setTargetSets(sets);
   };
 
@@ -139,12 +139,6 @@ const TargetList = ({ onTargetsChange }: TargetListProps) => {
         {targets.map((target, index) => (
           <div key={`target-${target}-${index}`} className={styles.targetItem}>
             <span>{target}</span>
-            <button
-              onClick={() => removeTarget(index)}
-              className={styles.removeButton}
-            >
-              ×
-            </button>
           </div>
         ))}
       </div>

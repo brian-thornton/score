@@ -45,3 +45,15 @@ export const deleteTargetSet = (id: string) => {
     throw error;
   }
 };
+
+export const removeBlankTargetSets = () => {
+  try {
+    const targetSets = getTargetSets();
+    const validSets = targetSets.filter(set => set.name && set.targets && set.targets.length > 0);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(validSets));
+    return validSets;
+  } catch (error) {
+    console.error('Error removing blank target sets:', error);
+    throw error;
+  }
+};

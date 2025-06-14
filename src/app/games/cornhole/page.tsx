@@ -60,11 +60,13 @@ const CornholePage = () => {
   if (match) {
     return (
       <div className={styles.container}>
-        <MatchTable
-          match={match}
-          displayEndRound={minRoundOrZero() + 10}
-          displayStartRound={minRoundOrZero()}
-        />
+        <div style={{ width: '100%', margin: 0, padding: 0 }}>
+          <MatchTable
+            match={match}
+            displayEndRound={minRoundOrZero() + 10}
+            displayStartRound={minRoundOrZero()}
+          />
+        </div>
         <div className={styles.scoreInputsContainer}>
           {match.matchPlayers.map((matchPlayer: MatchPlayer) => (
             <div key={matchPlayer.player.id} className={styles.playerScoreSection}>
@@ -105,10 +107,7 @@ const CornholePage = () => {
     );
   } else {
     return (
-      <div className={styles.container}>
-        <div className={styles.header}>
-          <h1>Cornhole Setup</h1>
-        </div>
+      <div className={styles.setupContainer}>
         <div className={styles.content}>
           <div className={styles.leftSection}>
             <div className={styles.section}>

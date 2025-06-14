@@ -55,11 +55,12 @@ const TargetGoalPage = () => {
 
   return match ? (
     <div className={styles.container}>
-      <GameHeader title="Target Goal" />
-      <MatchGoalTable match={match} headers={possibleScores}/>
+      <div style={{ width: '100%', margin: 0, padding: 0 }}>
+        <MatchGoalTable match={match} headers={possibleScores}/>
+      </div>
       {!match.isComplete && (
         <>
-          <ScoreInput possibleScores={possibleScores} match={match} onChange={onScoreChange} />
+          <ScoreInput possibleScores={possibleScores} match={match} onChange={onScoreChange} hideBullseye={true} />
           <button className={styles.controlButton} onClick={endMatch}>End Match</button>
         </>
       )}
@@ -79,10 +80,7 @@ const TargetGoalPage = () => {
       )}
     </div>
   ) : (
-    <div className={styles.container}>
-      <div className={styles.header}>
-        <h1>Target Goal</h1>
-      </div>
+    <div className={styles.setupContainer}>
       <div className={styles.content}>
         <div className={styles.leftSection}>
           <div className={styles.section}>

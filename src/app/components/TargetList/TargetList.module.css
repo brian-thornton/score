@@ -39,6 +39,9 @@
   cursor: pointer;
   transition: all 0.2s ease;
   white-space: nowrap;
+  min-width: fit-content;
+  width: auto;
+  display: inline-block;
 }
 
 .setButton:hover {
@@ -120,9 +123,8 @@
 }
 
 .targetItem {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
   padding: 0.5rem 1rem;
   background-color: var(--primary-color);
   border: 1px solid var(--secondary-color);
@@ -135,6 +137,7 @@
 .targetItem span {
   white-space: nowrap;
   min-width: fit-content;
+  display: inline-block;
 }
 
 .removeButton {
