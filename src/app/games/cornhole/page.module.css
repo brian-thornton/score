@@ -71,7 +71,7 @@
 }
 
 .section {
-  background-color: var(--secondary-color);
+  background-color: var(--accent-color);
   padding: 2rem;
   border: 1px solid var(--hover);
   border-radius: 16px;

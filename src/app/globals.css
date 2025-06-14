@@ -37,6 +37,15 @@
   --hover: #8a6dff;
 }
 
+:root[data-theme="orange"] {
+  --primary-color: #ff6b00;
+  --secondary-color: #ff8533;
+  --text-color: #ffffff;
+  --hover: #ffad80;
+  --active: #ffc299;
+  --active-rgb: 255, 194, 153;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --primary-color: #1a1a1a;

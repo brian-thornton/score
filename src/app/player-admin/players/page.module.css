@@ -1,8 +1,73 @@
 .container {
-  background-color: var(--background);
-  height: 100vh;
+  padding: 1rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .header {
   color: var(--text-color);
+  margin-left: 1rem;
+}
+
+.addPlayerForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: var(--secondary-color);
+  border-radius: 8px;
+}
+
+.input {
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--active);
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.button:hover {
+  background-color: var(--hover);
+}
+
+.addButton {
+  margin: 1rem 0 1rem 1rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  align-self: flex-start;
+}
+
+.addButton:hover {
+  background-color: var(--hover);
 }

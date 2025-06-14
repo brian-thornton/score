@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import MatchTable from "@/app/components/MatchTable/MatchTable";
 import ScoreInput from "@/app/components/ScoreInput/ScoreInput";
-import { Player, Match } from "@/app/lib/types";
+import { Player, Match, MatchPlayer } from "@/app/lib/types";
 import styles from "./page.module.css";
 import MatchResult from "@/app/components/MatchResult/MatchResult";
 import GameHeader from "@/app/components/GameHeader/GameHeader";
@@ -38,7 +38,9 @@ const TournamentPage = () => {
 
   const onMatchPlayerAdd = async (rowObject: any) => {
     const player = players.find((player) => player.email === rowObject[1]);
-    setMatchPlayers([...matchPlayers, player]);
+    if (player && matchPlayers.length < 4) {
+      setMatchPlayers([...matchPlayers, { player: player, score: 0, roundScores: [], isActive: false }]);
+    }
   }
 
   const endMatch = () => {
@@ -46,7 +48,8 @@ const TournamentPage = () => {
   }
 
   const onStartMatch = () => {
-    setMatch(createNewMatch(matchPlayers));
+    const players = matchPlayers.map((mp: MatchPlayer) => mp.player);
+    setMatch(createNewMatch(players));
   };
 
   const onScoreClick = (player: any, round: number) => {
@@ -76,50 +79,86 @@ const TournamentPage = () => {
     );
   }
 
-  return match ? (
-    <div className={styles.container}>
-      <MatchTable match={match} onScoreClick={onScoreClick} />
-      {!match.isComplete && (
-        <>
-          <ScoreInput possibleScores={[0, 1, 2, 3, 4, 6, 8, 10]} onChange={onScoreChange} match={match} />
-          <button className={styles.controlButton} onClick={endMatch}>End Match</button>
-        </>
-      )}
-      {match.isComplete && (
-        <>
-          <MatchResult match={match} />
-          <div className={styles.controlsRow}>
+  if (match) {
+    return (
+      <div className={styles.container}>
+        <MatchTable match={match} onScoreClick={onScoreClick} />
+        {!match.isComplete && (
+          <>
+            <ScoreInput possibleScores={[0, 1, 2, 3, 4, 6, 8, 10]} onChange={onScoreChange} match={match} />
             <button className={styles.controlButton} onClick={endMatch}>End Match</button>
-            <button
-              disabled={matchPlayers.length === 0}
-              className={styles.controlButton}
-              onClick={onStartMatch}>
-              Play Again
-            </button>
+          </>
+        )}
+        {match.isComplete && (
+          <>
+            <MatchResult match={match} />
+            <div className={styles.controlsRow}>
+              <button className={styles.controlButton} onClick={endMatch}>End Match</button>
+              <button
+                disabled={matchPlayers.length === 0}
+                className={styles.controlButton}
+                onClick={onStartMatch}>
+                Play Again
+              </button>
+            </div>
+          </>
+        )}
+      </div>
+    );
+  } else {
+    return (
+      <div className={styles.setupContainer}>
+        <div className={styles.content}>
+          <div className={styles.leftSection}>
+            <div className={styles.section}>
+              <h2 className={styles.sectionTitle}>Available Players</h2>
+              <Table
+                enableFilter
+                columns={columns}
+                data={displayPlayers}
+                deleteEnabled={false}
+                editable={false}
+                allowAdd={false}
+                selectable
+                onRowAddClick={onMatchPlayerAdd}
+              />
+            </div>
           </div>
-        </>
-      )}
-    </div>
-  ) : (
-    <div className={styles.container}>
-      <Table
-        enableFilter
-        columns={columns}
-        data={displayPlayers}
-        deleteEnabled
-        editable
-        allowAdd={false}
-        selectable
-        onRowAddClick={onMatchPlayerAdd}
-      />
-      <button
-        disabled={matchPlayers.length === 0}
-        className={styles.controlButton}
-        onClick={onStartMatch}>
-        Start Match
-      </button>
-    </div>
-  );
+          <div className={styles.rightSection}>
+            <div className={styles.section}>
+              <h2 className={styles.sectionTitle}>Players for Match ({matchPlayers.length}/4)</h2>
+              {matchPlayers.length > 0 ? (
+                <Table
+                  columns={columns}
+                  data={matchPlayers.map((p: MatchPlayer) => [p.player.name, p.player.email, p.player.phone])}
+                  deleteEnabled={true}
+                  editable={false}
+                  allowAdd={false}
+                  selectable={false}
+                  onDeleteClick={(index: number) => {
+                    setMatchPlayers(matchPlayers.filter((_: any, i: number) => i !== index));
+                  }}
+                />
+              ) : (
+                <p>Select up to 4 players from the left.</p>
+              )}
+            </div>
+            <div className={styles.section}>
+              <h2 className={styles.sectionTitle}>Match Controls</h2>
+              <div className={styles.controlsRow}>
+                <button
+                  disabled={matchPlayers.length < 2 || matchPlayers.length > 4}
+                  className={styles.startMatchButton}
+                  onClick={onStartMatch}>
+                  Start Match
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 };
 
 export default TournamentPage;

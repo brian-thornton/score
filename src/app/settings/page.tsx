@@ -9,6 +9,7 @@ const themes = [
   { id: 'forest', name: 'Forest', colors: { primary: '#1b4332', secondary: '#40916c', text: '#f5f5f5', hover: '#52b788' } },
   { id: 'matrix', name: 'Matrix', colors: { primary: '#000000', secondary: '#003300', text: '#00ff00', hover: '#006600' } },
   { id: 'purple', name: 'Purple', colors: { primary: '#2d1b69', secondary: '#6b4caf', text: '#f5f5f5', hover: '#8a6dff' } },
+  { id: 'orange', name: 'Orange', colors: { primary: '#ff6b00', secondary: '#ff8533', text: '#ffffff', hover: '#ffad80' } },
 ];
 
 export default function SettingsPage() {

@@ -43,7 +43,7 @@ const TargetNumberPage = () => {
 
   const onMatchPlayerAdd = (rowObject: PlayerTableRow) => {
     const player = players.find((player) => player.email === rowObject[1]);
-    if (player) {
+    if (player && matchPlayers.length < 2) {
       setMatchPlayers((prev) => [...prev, player]);
     }
   };
@@ -100,32 +100,61 @@ const TargetNumberPage = () => {
 
   if (!match) {
     return (
-      <div className={styles.container}>
-        <Table
-          enableFilter
-          columns={TABLE_COLUMNS}
-          data={displayPlayers}
-          deleteEnabled
-          editable
-          allowAdd={false}
-          selectable
-          onRowAddClick={onMatchPlayerAdd}
-        />
-        <div className={styles.controlsRow}>
-          <input
-            className={styles.targetNumberInput}
-            type="number"
-            placeholder="Target"
-            value={targetNumber}
-            onChange={(e) => setTargetNumber(parseInt(e.target.value) || DEFAULT_TARGET_NUMBER)}
-          />
-          <button
-            disabled={matchPlayers.length === 0}
-            className={styles.controlButton}
-            onClick={onStartMatch}
-          >
-            Start Match
-          </button>
+      <div className={styles.setupContainer}>
+        <div className={styles.content}>
+          <div className={styles.leftSection}>
+            <div className={styles.section}>
+              <h2 className={styles.sectionTitle}>Available Players</h2>
+              <Table
+                enableFilter
+                columns={TABLE_COLUMNS}
+                data={displayPlayers}
+                deleteEnabled={false}
+                editable={false}
+                allowAdd={false}
+                selectable
+                onRowAddClick={onMatchPlayerAdd}
+              />
+            </div>
+          </div>
+          <div className={styles.rightSection}>
+            <div className={styles.section}>
+              <h2 className={styles.sectionTitle}>Players for Match ({matchPlayers.length}/2)</h2>
+              {matchPlayers.length > 0 ? (
+                <Table
+                  columns={TABLE_COLUMNS}
+                  data={matchPlayers.map((p: Player) => [p.name, p.email, p.phone])}
+                  deleteEnabled={true}
+                  editable={false}
+                  allowAdd={false}
+                  selectable={false}
+                  onDeleteClick={(index: number) => {
+                    setMatchPlayers(matchPlayers.filter((_: any, i: number) => i !== index));
+                  }}
+                />
+              ) : (
+                <p>Select up to 2 players from the left.</p>
+              )}
+            </div>
+            <div className={styles.section}>
+              <h2 className={styles.sectionTitle}>Match Controls</h2>
+              <div className={styles.controlsRow}>
+                <input
+                  className={styles.targetNumberInput}
+                  type="number"
+                  placeholder="Target"
+                  value={targetNumber}
+                  onChange={(e) => setTargetNumber(parseInt(e.target.value) || DEFAULT_TARGET_NUMBER)}
+                />
+                <button
+                  disabled={matchPlayers.length !== 2}
+                  className={styles.startMatchButton}
+                  onClick={onStartMatch}>
+                  Start Match
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );
